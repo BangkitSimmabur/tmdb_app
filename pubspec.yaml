@@ -47,6 +47,8 @@ dependencies:
     sdk: flutter
   intl: any
   flutter_secure_storage: ^4.2.1
+  http: ^1.1.0
+  another_flushbar: ^1.12.30
 
 
 dev_dependencies:

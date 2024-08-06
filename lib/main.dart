@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:tmdb_app/services/navigation_service.dart';
 
 void main() {
+  setupLocator();
   runApp(const MyApp());
+}
+
+void setupLocator() {
+  GetIt.I.registerLazySingleton<NavigationService>(() => NavigationService());
 }
 
 class MyApp extends StatelessWidget {
