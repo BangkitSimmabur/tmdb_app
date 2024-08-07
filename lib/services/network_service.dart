@@ -26,13 +26,17 @@ class NetworkService with ChangeNotifier {
 
     var resBody = json.decode(response.body);
     return HandlingServerLog(
-        resBody['status'], resBody['data'], resBody['message']);
+      resBody['status_code'],
+      resBody,
+      resBody['status_message'],
+      resBody['success'],
+    );
   }
 
   Future<HandlingServerLog> doHttpPost(
-      String url,
-      reqBody,
-      ) async {
+    String url,
+    reqBody,
+  ) async {
     var requestBody = json.encode(reqBody);
 
     dynamic header;
@@ -51,17 +55,21 @@ class NetworkService with ChangeNotifier {
     }
 
     http.Response response =
-    await http.post(Uri.parse(url), body: requestBody, headers: header);
+        await http.post(Uri.parse(url), body: requestBody, headers: header);
 
     var resBody = json.decode(response.body);
     return HandlingServerLog(
-        resBody['status'], resBody['data'], resBody['message']);
+      resBody['status_code'],
+      resBody,
+      resBody['status_message'],
+      resBody['success'],
+    );
   }
 
   Future<HandlingServerLog> doHttpPut(
-      String url,
-      reqBody,
-      ) async {
+    String url,
+    reqBody,
+  ) async {
     dynamic requestBody;
     if (reqBody == null) {
       requestBody = null;
@@ -86,11 +94,15 @@ class NetworkService with ChangeNotifier {
     }
 
     http.Response response =
-    await http.put(Uri.parse(url), body: requestBody, headers: header);
+        await http.put(Uri.parse(url), body: requestBody, headers: header);
 
     var resBody = json.decode(response.body);
     return HandlingServerLog(
-        resBody['status'], resBody['data'], resBody['message']);
+      resBody['status_code'],
+      resBody,
+      resBody['status_message'],
+      resBody['success'],
+    );
   }
 
   Future<HandlingServerLog> doHttpDelete(url) async {
@@ -109,12 +121,14 @@ class NetworkService with ChangeNotifier {
       };
     }
 
-    http.Response response =
-    await http.delete(Uri.parse(url), headers: header);
+    http.Response response = await http.delete(Uri.parse(url), headers: header);
 
     var resBody = json.decode(response.body);
     return HandlingServerLog(
-        resBody['status'], resBody['data'], resBody['message']);
+      resBody['status_code'],
+      resBody,
+      resBody['status_message'],
+      resBody['success'],
+    );
   }
-
 }
