@@ -33,4 +33,16 @@ class MovieService extends NetworkService {
     }
     return null;
   }
+
+  Future<List<Movie>?> getPopularMovies() async {
+    HandlingServerLog serverLog = await doHttpGet(
+        'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=5768f327d0eee19143087d1e23116d27');
+
+    if (serverLog.data['results'] != null) {
+      var movies = moviesFromJson(serverLog.data['results']);
+      print(movies);
+      return movies;
+    }
+    return null;
+  }
 }
