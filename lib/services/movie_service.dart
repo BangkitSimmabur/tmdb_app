@@ -1,31 +1,25 @@
-import 'dart:io';
-
-import 'package:get_it/get_it.dart';
+import 'package:tmdb_app/helpers/constant.dart';
 import 'package:tmdb_app/helpers/server_helper.dart';
 import 'package:tmdb_app/models/movie.dart';
-import 'package:tmdb_app/services/constant_service.dart';
 import 'package:tmdb_app/services/network_service.dart';
 
 class MovieService extends NetworkService {
-  List<Movie>? nowPlaying = [];
-
   MovieService(super.constantService);
 
   Future<List<Movie>?> getNowPlaying() async {
     HandlingServerLog serverLog = await doHttpGet(
-        'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=5768f327d0eee19143087d1e23116d27');
+        '/movie/now_playing?language=en-US&page=1&api_key=${Constant.apiKey}');
 
     if (serverLog.data['results'] != null) {
       var movies = moviesFromJson(serverLog.data['results']);
-      print(movies);
       return movies;
     }
-    return null;
+    return [];
   }
 
   Future<Movie?> getMovieDetail(int id) async {
-    HandlingServerLog serverLog = await doHttpGet(
-        'https://api.themoviedb.org/3/movie/$id?language=en-US&api_key=5768f327d0eee19143087d1e23116d27');
+    HandlingServerLog serverLog =
+        await doHttpGet('/movie/$id?language=en-US&api_key=${Constant.apiKey}');
 
     if (serverLog.data != null) {
       Movie? movieDetail = Movie.fromJson(serverLog.data);
@@ -36,11 +30,22 @@ class MovieService extends NetworkService {
 
   Future<List<Movie>?> getPopularMovies() async {
     HandlingServerLog serverLog = await doHttpGet(
-        'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=5768f327d0eee19143087d1e23116d27');
+        '/movie/popular?language=en-US&page=1&api_key=${Constant.apiKey}');
 
     if (serverLog.data['results'] != null) {
       var movies = moviesFromJson(serverLog.data['results']);
-      print(movies);
+      return movies;
+    }
+    return null;
+  }
+
+  Future<List<Movie>?> getMovieByGenres(List<int?> genres) async {
+    String listGenre = genres.join(' | ');
+    HandlingServerLog serverLog = await doHttpGet(
+        "/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=$listGenre&api_key=${Constant.apiKey}");
+
+    if (serverLog.data['results'] != null) {
+      var movies = moviesFromJson(serverLog.data['results']);
       return movies;
     }
     return null;

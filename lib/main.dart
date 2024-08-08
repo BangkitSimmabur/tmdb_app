@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdb_app/screens/home_screen.dart';
@@ -16,7 +17,10 @@ void main() {
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
-      runApp(MyApp());
+      SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp],
+      );
+      runApp(const MyApp());
     },
     (error, stackTrace) async {
       if (kDebugMode) {

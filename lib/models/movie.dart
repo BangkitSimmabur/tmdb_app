@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tmdb_app/helpers/date_helper.dart';
 import 'package:tmdb_app/models/belongs_to_collection.dart';
 import 'package:tmdb_app/models/genre.dart';
 import 'package:tmdb_app/models/production_company.dart';
@@ -29,8 +30,12 @@ class Movie {
   double? popularity;
   @JsonKey(name: 'poster_path')
   String? posterPath;
-  @JsonKey(name: 'release_date')
-  String? releaseDate;
+  @JsonKey(
+    name: 'release_date',
+    fromJson: DateHelper.convertDateAndIsoString,
+    toJson: DateHelper.convertDateAndIsoString,
+  )
+  DateTime? releaseDate;
   @JsonKey(name: 'video')
   bool? video;
   @JsonKey(name: 'vote_average')

@@ -10,8 +10,6 @@ class NavigationService {
 
   Widget? currentWidget;
 
-  String? currentToken;
-
   Future<dynamic>? navigateNamedTo(String routeName) {
     if (navigatorKey.currentState == null) return null;
 

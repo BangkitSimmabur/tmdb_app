@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:tmdb_app/helpers/constant.dart';
 import 'package:tmdb_app/helpers/server_helper.dart';
 import 'dart:convert';
 import 'package:tmdb_app/services/constant_service.dart';
@@ -10,7 +11,6 @@ class NetworkService with ChangeNotifier {
 
   Future<HandlingServerLog> doHttpGet(url) async {
     dynamic header;
-
     if (constantService.token != null) {
       header = {
         'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ class NetworkService with ChangeNotifier {
       };
     }
 
-    http.Response response = await http.get(Uri.parse(url), headers: header);
+    http.Response response = await http.get(Uri.parse("${Constant.baseUrl}$url"), headers: header);
 
     var resBody = json.decode(response.body);
     return HandlingServerLog(
@@ -55,7 +55,7 @@ class NetworkService with ChangeNotifier {
     }
 
     http.Response response =
-        await http.post(Uri.parse(url), body: requestBody, headers: header);
+        await http.post(Uri.parse("${Constant.baseUrl}$url"), body: requestBody, headers: header);
 
     var resBody = json.decode(response.body);
     return HandlingServerLog(
@@ -94,7 +94,7 @@ class NetworkService with ChangeNotifier {
     }
 
     http.Response response =
-        await http.put(Uri.parse(url), body: requestBody, headers: header);
+        await http.put(Uri.parse("${Constant.baseUrl}$url"), body: requestBody, headers: header);
 
     var resBody = json.decode(response.body);
     return HandlingServerLog(
@@ -121,7 +121,7 @@ class NetworkService with ChangeNotifier {
       };
     }
 
-    http.Response response = await http.delete(Uri.parse(url), headers: header);
+    http.Response response = await http.delete(Uri.parse("${Constant.baseUrl}$url"), headers: header);
 
     var resBody = json.decode(response.body);
     return HandlingServerLog(
