@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap: _onNavigateRegister,
                       child: const CommonText(
                         "Register here",
-                        textColor: Constant.darkRed,
+                        textColor: Constant.colorDarkRed,
                         fontSize: Constant.fontSizeXS,
                       ),
                     )
