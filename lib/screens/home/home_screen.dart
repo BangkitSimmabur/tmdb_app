@@ -7,7 +7,8 @@ import 'package:tmdb_app/models/movie.dart';
 import 'package:tmdb_app/reusable_components/common_components/common_app_bar.dart';
 import 'package:tmdb_app/reusable_components/common_components/common_spinner.dart';
 import 'package:tmdb_app/reusable_components/common_components/common_text.dart';
-import 'package:tmdb_app/reusable_components/movie_card.dart';
+import 'package:tmdb_app/screens/home/now_playing_component.dart';
+import 'package:tmdb_app/screens/home/popular_component.dart';
 import 'package:tmdb_app/screens/login_screen.dart';
 import 'package:tmdb_app/screens/profile_screen.dart';
 import 'package:tmdb_app/services/constant_service.dart';
@@ -25,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late ConstantService _constantService;
   bool nowPlayingLoading = true;
   bool popularLoading = true;
-  List<Movie> nowPlaying = [];
+  List<Movie> nowPlayingMovies = [];
   List<Movie> popularMovies = [];
 
   @override
@@ -58,7 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const CommonText(
                 "Now Playing",
@@ -74,24 +74,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 300,
                   child: nowPlayingLoading
                       ? const CommonSpinner()
-                      : CarouselSlider.builder(
-                          itemCount:
-                              nowPlaying.length < 6 ? nowPlaying.length : 6,
-                          itemBuilder: (context, index, pageViewIndex) {
-                            return MovieCard(
-                              movie: nowPlaying[index],
-                            );
-                          },
-                          options: CarouselOptions(
-                            height: 300,
-                            autoPlay: false,
-                            enlargeCenterPage: true,
-                            viewportFraction: 0.55,
-                            autoPlayCurve: Curves.fastLinearToSlowEaseIn,
-                            autoPlayAnimationDuration:
-                                const Duration(seconds: 1),
-                          ),
-                        ),
+                      : HomeNowPlayingMovies(nowPlayingMovies),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: Constant.paddingSM),
+                child: Divider(
+                  color: Constant.colorDarkRed,
                 ),
               ),
               const CommonText(
@@ -102,9 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               popularLoading
                   ? const CommonSpinner()
-                  : Column(
-                      children: listPopularMovies,
-                    )
+                  : HomePopularMovies(popularMovies),
             ],
           ),
         ),
@@ -116,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var fetchNowPlaying = await _movieService.getNowPlaying();
     setState(() {
       nowPlayingLoading = false;
-      nowPlaying = fetchNowPlaying ?? [];
+      nowPlayingMovies = fetchNowPlaying ?? [];
     });
     var fetchPopularMovies = await _movieService.getPopularMovies();
     setState(() {
@@ -124,22 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
       popularMovies = fetchPopularMovies ?? [];
     });
     return;
-  }
-
-  List<Widget> get listPopularMovies {
-    List<Widget> listWidgets = [];
-    popularMovies.asMap().forEach((int key, Movie movie) {
-      listWidgets.add(
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: Constant.paddingMD),
-          child: MovieCard(
-            movie: movie,
-          ),
-        ),
-      );
-    });
-
-    return listWidgets;
   }
 
   void _onNavigateToProfile() {
