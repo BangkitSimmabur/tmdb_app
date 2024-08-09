@@ -27,9 +27,9 @@ class OutlinedFormField extends StatefulWidget {
     this.inputType,
     this.suffixIcon,
     this.disabled = false,
-    this.fontSize =  Constant.fontSizeSM,
-    this.labelColor = Constant.white,
-    this.focussedColor = Constant.white,
+    this.fontSize = Constant.fontSizeSM,
+    this.labelColor = Constant.colorWhite,
+    this.focussedColor = Constant.colorWhite,
   });
   @override
   State<OutlinedFormField> createState() => _OutlinedFormFieldState();
@@ -53,7 +53,7 @@ class _OutlinedFormFieldState extends State<OutlinedFormField> {
         // contentPadding: const EdgeInsets.all(16),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(
-            color: Constant.greyText,
+            color: Constant.colorGreyText,
             width: 1,
           ),
           borderRadius: BorderRadius.circular(
@@ -62,7 +62,7 @@ class _OutlinedFormFieldState extends State<OutlinedFormField> {
         ),
         border: OutlineInputBorder(
           borderSide: const BorderSide(
-            color: Constant.greyText,
+            color: Constant.colorGreyText,
             width: 1,
           ),
           borderRadius: BorderRadius.circular(
@@ -71,7 +71,7 @@ class _OutlinedFormFieldState extends State<OutlinedFormField> {
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: widget.disabled! ? Constant.greyText : Constant.white,
+            color: widget.disabled! ? Constant.colorGreyText : Constant.colorWhite,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(
@@ -80,28 +80,26 @@ class _OutlinedFormFieldState extends State<OutlinedFormField> {
         ),
         focusColor: widget.focussedColor,
         hintText: widget.hintText,
-        hintStyle: const TextStyle(color: Constant.greyText,),
+        hintStyle: const TextStyle(
+          color: Constant.colorGreyText,
+        ),
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.suffixIcon,
         prefixIconColor: MaterialStateColor.resolveWith(
-          (states) => states.contains(MaterialState.error)
-              ? Constant.darkRed
-              : states.contains(MaterialState.focused) ||
-                      widget.inputController.text != ""
-                  ? widget.disabled!
-                      ? Constant.greyText
-                      : Constant.white
-                  : Constant.greyText,
+          (states) => states.contains(MaterialState.focused) ||
+                  widget.inputController.text != ""
+              ? widget.disabled!
+                  ? Constant.colorGreyText
+                  : Constant.colorWhite
+              : Constant.colorGreyText,
         ),
         suffixIconColor: MaterialStateColor.resolveWith(
-          (states) => states.contains(MaterialState.error)
-              ? Constant.darkRed
-              : states.contains(MaterialState.focused) ||
-                      widget.inputController.text != ""
-                  ? widget.disabled!
-                      ? Constant.greyText
-                      : Constant.white
-                  : Constant.greyText,
+          (states) => states.contains(MaterialState.focused) ||
+                  widget.inputController.text != ""
+              ? widget.disabled!
+                  ? Constant.colorGreyText
+                  : Constant.colorWhite
+              : Constant.colorGreyText,
         ),
       ),
     );

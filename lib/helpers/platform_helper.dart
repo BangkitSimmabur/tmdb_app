@@ -58,8 +58,8 @@ class PlatformHelper {
       animationDuration: Constant.defaultDurationSnackbar["animationDuration"]!,
       flushbarPosition: FlushbarPosition.BOTTOM,
       flushbarStyle: FlushbarStyle.GROUNDED,
-      backgroundColor: backgroundColor ?? Constant.white,
-      messageColor: textColor ?? Constant.black,
+      backgroundColor: backgroundColor ?? Constant.colorWhite,
+      messageColor: textColor ?? Constant.colorBlack,
       isDismissible: true,
       icon: const Icon(
         Icons.done,
@@ -89,11 +89,11 @@ class PlatformHelper {
 
     return Flushbar(
       message: label,
-      messageColor: textColor ?? Constant.black,
-      backgroundColor: backgroundColor ?? Constant.white,
+      messageColor: textColor ?? Constant.colorBlack,
+      backgroundColor: backgroundColor ?? Constant.colorWhite,
       icon: Icon(
         FontAwesomeIcons.circleExclamation,
-        color: textColor ?? Constant.black,
+        color: textColor ?? Constant.colorBlack,
       ),
       duration: Constant.defaultDurationSnackbar["duration"],
       animationDuration: Constant.defaultDurationSnackbar["animationDuration"]!,
@@ -114,7 +114,7 @@ class PlatformHelper {
           builder: (BuildContext context) {
             return AlertDialog(
               title: const SpinKitFadingCircle(
-                color: Constant.lightBlue,
+                color: Constant.colorRed,
                 size: 50,
               ),
               content: Text(

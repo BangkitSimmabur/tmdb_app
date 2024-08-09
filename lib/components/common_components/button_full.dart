@@ -56,7 +56,7 @@ class _CustomButtonFullBorderedState extends State<CustomButtonFullBordered> {
         onPressed: !widget.isLoading ? widget.onClick : null,
         style: ElevatedButton.styleFrom(
             backgroundColor:
-                widget.active ? Constant.white : widget.buttonColor,
+                widget.active ? Constant.colorWhite : widget.buttonColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius),
             )),

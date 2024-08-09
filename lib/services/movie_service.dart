@@ -8,7 +8,7 @@ class MovieService extends NetworkService {
 
   Future<List<Movie>?> getNowPlaying() async {
     HandlingServerLog serverLog = await doHttpGet(
-        '/movie/now_playing?language=en-US&page=1&api_key=${Constant.apiKey}');
+        '/movie/now_playing?language=en-US&page=1&api_key=${Constant.tmdbApiKey}');
 
     if (serverLog.data['results'] != null) {
       var movies = moviesFromJson(serverLog.data['results']);
@@ -19,7 +19,7 @@ class MovieService extends NetworkService {
 
   Future<Movie?> getMovieDetail(int id) async {
     HandlingServerLog serverLog =
-        await doHttpGet('/movie/$id?language=en-US&api_key=${Constant.apiKey}');
+        await doHttpGet('/movie/$id?language=en-US&api_key=${Constant.tmdbApiKey}');
 
     if (serverLog.data != null) {
       Movie? movieDetail = Movie.fromJson(serverLog.data);
@@ -30,7 +30,7 @@ class MovieService extends NetworkService {
 
   Future<List<Movie>?> getPopularMovies() async {
     HandlingServerLog serverLog = await doHttpGet(
-        '/movie/popular?language=en-US&page=1&api_key=${Constant.apiKey}');
+        '/movie/popular?language=en-US&page=1&api_key=${Constant.tmdbApiKey}');
 
     if (serverLog.data['results'] != null) {
       var movies = moviesFromJson(serverLog.data['results']);
@@ -42,7 +42,7 @@ class MovieService extends NetworkService {
   Future<List<Movie>?> getMovieByGenres(List<int?> genres) async {
     String listGenre = genres.join(' | ');
     HandlingServerLog serverLog = await doHttpGet(
-        "/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=$listGenre&api_key=${Constant.apiKey}");
+        "/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=$listGenre&api_key=${Constant.tmdbApiKey}");
 
     if (serverLog.data['results'] != null) {
       var movies = moviesFromJson(serverLog.data['results']);

@@ -24,7 +24,7 @@ class MovieCard extends StatelessWidget {
           );
         },
         child: Container(
-          color: Constant.lightGrey,
+          color: Constant.colorLightGrey,
           child: Image.network(
             "${Constant.imagePath500}/${movie.posterPath!}",
             fit: BoxFit.cover,

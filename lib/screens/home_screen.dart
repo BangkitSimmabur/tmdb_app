@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      backgroundColor: Constant.black,
+      backgroundColor: Constant.colorBlack,
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 "Now Playing",
                 fontSize: Constant.fontSizeLG,
                 fontWeight: FontWeight.bold,
-                textColor: Constant.white,
+                textColor: Constant.colorWhite,
               ),
               Padding(
                 padding:
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 "Popular",
                 fontSize: Constant.fontSizeLG,
                 fontWeight: FontWeight.bold,
-                textColor: Constant.white,
+                textColor: Constant.colorWhite,
               ),
               popularLoading
                   ? const CommonSpinner()

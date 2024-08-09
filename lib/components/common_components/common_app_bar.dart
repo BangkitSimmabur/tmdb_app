@@ -13,7 +13,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title, {
     super.key,
     this.fontSize = Constant.fontSizeXL,
-    this.textColor = Constant.white,
+    this.textColor = Constant.colorWhite,
     this.fontWeight = FontWeight.bold,
     this.actions,
   }) : preferredSize = const Size.fromHeight(56.0);
@@ -25,7 +25,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Constant.black,
+      backgroundColor: Constant.colorBlack,
       elevation: 0,
       title: CommonText(
         title,

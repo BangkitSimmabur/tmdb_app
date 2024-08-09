@@ -16,7 +16,7 @@ class CommonSpinner extends StatelessWidget {
       height: spinnerSize,
       width: spinnerSize,
       child:  SpinKitFadingCircle(
-        color: spinnerColor ?? Constant.vibrantLightBlue,
+        color: spinnerColor ?? Constant.colorRed,
       ),
     ),
   );

@@ -12,7 +12,7 @@ class CommonText extends StatelessWidget {
       this.text, {
         super.key,
         this.fontSize = Constant.fontSizeSM,
-        this.textColor = Constant.black,
+        this.textColor = Constant.colorBlack,
         this.fontWeight,
         this.textAlign,
       });

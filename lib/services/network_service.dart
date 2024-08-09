@@ -18,7 +18,7 @@ class NetworkService with ChangeNotifier {
     }
 
     http.Response response = await http.get(
-      Uri.parse("${Constant.baseUrl}$url"),
+      Uri.parse("${Constant.tmdbBaseUrl}$url"),
       headers: header,
     );
 
@@ -47,7 +47,7 @@ class NetworkService with ChangeNotifier {
     }
 
     http.Response response = await http.post(
-      Uri.parse("${Constant.baseUrl}$url"),
+      Uri.parse("${Constant.tmdbBaseUrl}$url"),
       body: requestBody,
       headers: header,
     );
@@ -83,7 +83,7 @@ class NetworkService with ChangeNotifier {
     }
 
     http.Response response = await http.put(
-      Uri.parse("${Constant.baseUrl}$url"),
+      Uri.parse("${Constant.tmdbBaseUrl}$url"),
       body: requestBody,
       headers: header,
     );
@@ -108,7 +108,7 @@ class NetworkService with ChangeNotifier {
     }
 
     http.Response response = await http
-        .delete(Uri.parse("${Constant.baseUrl}$url"), headers: header);
+        .delete(Uri.parse("${Constant.tmdbBaseUrl}$url"), headers: header);
 
     var resBody = json.decode(response.body);
     return HandlingServerLog(

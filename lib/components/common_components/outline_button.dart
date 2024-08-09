@@ -23,8 +23,8 @@ class CustomOutlinedButton extends StatefulWidget {
   const CustomOutlinedButton(
     this.labelText, {
     super.key,
-    this.buttonColor = Constant.white,
-    this.labelColor = Constant.black,
+    this.buttonColor = Constant.colorWhite,
+    this.labelColor = Constant.colorBlack,
     this.labelSize = 16,
     this.onTap,
     this.borderRadius = Constant.borderRadiusSM,
@@ -36,7 +36,7 @@ class CustomOutlinedButton extends StatefulWidget {
     this.maxLines = 1,
     this.textOverflow = TextOverflow.ellipsis,
     this.height = 4,
-    this.borderColor = Constant.black,
+    this.borderColor = Constant.colorBlack,
   });
 
   @override

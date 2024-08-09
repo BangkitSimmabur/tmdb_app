@@ -10,25 +10,18 @@ class Constant {
   static const double fontSizeXL = 30.0;
 
   //Color
-  static const Color blue = Color(0xff0000FF);
-  static const Color darkBlue = Color(0xff032541);
-  static const Color lightBlue = Color(0xff01b3e4);
-  static const Color vibrantLightBlue = Color(0xff0074f1);
-  static const Color vibrantDarkBlue = Color(0xff062541);
-  static const Color grey = Color(0xff808080);
-  static const Color greyText = Color(0xff848484);
-  static const Color greyBorder = Color(0xffECECEC);
-  static const Color lightGrey = Color(0xffe3e3e3);
-  static const Color darkGrey = Color(0xffc8c8c8);
+  static const Color colorGreyText = Color(0xff848484);
+  static const Color colorGreyBorder = Color(0xffECECEC);
+  static const Color colorLightGrey = Color(0xffe3e3e3);
+  static const Color colorDarkGrey = Color(0xffc8c8c8);
   static const Color darkRed = Color(0xffc61439);
-  static const Color black = Color(0xff000000);
-  static const Color white = Color(0xffffffff);
-  static const Color whiteOpacity25 = Color(0x40ffffff);
-  static const Color whiteOpacity50 = Color(0x80ffffff);
-  static const Color whiteOpacity75 = Color(0xBFffffff);
-  static const Color blackOpacity25 = Color(0x40000000);
-  static const Color blackOpacity50 = Color(0x80000000);
-  static const Color blackOpacity75 = Color(0xBF000000);
+  static const Color colorRed = Color(0xffff0000);
+  static const Color colorBlack = Color(0xff000000);
+  static const Color colorWhite = Color(0xffffffff);
+  static const Color colorWhiteOpacity75 = Color(0xBFffffff);
+  static const Color colorBlackOpacity25 = Color(0x40000000);
+  static const Color colorBlackOpacity50 = Color(0x80000000);
+  static const Color colorBlackOpacity75 = Color(0xBF000000);
 
   //spacing
   static const double spacingXXS = 4.0;
@@ -45,7 +38,6 @@ class Constant {
   };
 
   //padding
-  static double defaultPaddingView = 10.0;
   static const double paddingXXS = 4.0;
   static const double paddingXS = 8.0;
   static const double paddingSM = 12.0;
@@ -60,8 +52,9 @@ class Constant {
   static const double borderRadiusLG = 28.0;
 
   //tmdb api key
-  static const String apiKey = '5768f327d0eee19143087d1e23116d27';
-  static const String baseUrl = 'https://api.themoviedb.org/3';
+  static const String tmdbApiKey = '5768f327d0eee19143087d1e23116d27';
+  static const String tmdbBaseUrl = 'https://api.themoviedb.org/3';
+  static const String tmdbRegisterUrl = 'https://www.themoviedb.org/signup';
 
   //tmd image path according to width
   static const String imagePath92 = "https://image.tmdb.org/t/p/w92";

@@ -38,13 +38,13 @@ class _MovieDetailState extends State<MovieDetail> {
   Widget build(BuildContext context) {
     _movieService = Provider.of<MovieService>(context);
     return Scaffold(
-      backgroundColor: Constant.black,
+      backgroundColor: Constant.colorBlack,
       body: movieDetailLoading
           ? const CommonSpinner()
           : CustomScrollView(
               slivers: [
                 SliverAppBar.large(
-                  backgroundColor: Constant.black,
+                  backgroundColor: Constant.colorBlack,
                   leading: Container(
                     height: 70,
                     width: 70,
@@ -53,7 +53,7 @@ class _MovieDetailState extends State<MovieDetail> {
                       left: Constant.paddingMD,
                     ),
                     decoration: BoxDecoration(
-                      color: Constant.blackOpacity75,
+                      color: Constant.colorBlackOpacity75,
                       borderRadius: BorderRadius.circular(
                         Constant.borderRadiusSM,
                       ),
@@ -64,7 +64,7 @@ class _MovieDetailState extends State<MovieDetail> {
                       },
                       icon: const Icon(
                         Icons.arrow_back,
-                        color: Constant.white,
+                        color: Constant.colorWhite,
                       ),
                     ),
                   ),
@@ -84,10 +84,10 @@ class _MovieDetailState extends State<MovieDetail> {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              Constant.blackOpacity25,
-                              Constant.blackOpacity50,
-                              Constant.blackOpacity75,
-                              Constant.black,
+                              Constant.colorBlackOpacity25,
+                              Constant.colorBlackOpacity50,
+                              Constant.colorBlackOpacity75,
+                              Constant.colorBlack,
                             ],
                           ),
                         ),
@@ -95,7 +95,7 @@ class _MovieDetailState extends State<MovieDetail> {
                           movieDetail?.title != null
                               ? "${movieDetail?.title} (${movieDetail?.releaseDate?.year})"
                               : "",
-                          textColor: Constant.white,
+                          textColor: Constant.colorWhite,
                           fontSize: Constant.fontSizeMD,
                         ),
                       ),
@@ -137,9 +137,9 @@ class _MovieDetailState extends State<MovieDetail> {
                                 child: CustomOutlinedButton(
                                   "+ Watchlist",
                                   onTap: () {},
-                                  buttonColor: Constant.black,
-                                  borderColor: Constant.white,
-                                  labelColor: Constant.white,
+                                  buttonColor: Constant.colorBlack,
+                                  borderColor: Constant.colorWhite,
+                                  labelColor: Constant.colorWhite,
                                 ),
                               ),
                             ),
@@ -151,9 +151,9 @@ class _MovieDetailState extends State<MovieDetail> {
                                 child: CustomOutlinedButton(
                                   "+ Favorite",
                                   onTap: () {},
-                                  buttonColor: Constant.black,
-                                  borderColor: Constant.white,
-                                  labelColor: Constant.white,
+                                  buttonColor: Constant.colorBlack,
+                                  borderColor: Constant.colorWhite,
+                                  labelColor: Constant.colorWhite,
                                 ),
                               ),
                             ),
@@ -169,7 +169,7 @@ class _MovieDetailState extends State<MovieDetail> {
                               const CommonText(
                                 "Genre: ",
                                 fontWeight: FontWeight.bold,
-                                textColor: Constant.white,
+                                textColor: Constant.colorWhite,
                               ),
                               Expanded(
                                 child: Padding(
@@ -178,7 +178,7 @@ class _MovieDetailState extends State<MovieDetail> {
                                   child: CommonText(
                                     getGenres() + getGenres(),
                                     fontSize: Constant.fontSizeXS,
-                                    textColor: Constant.white,
+                                    textColor: Constant.colorWhite,
                                   ),
                                 ),
                               ),
@@ -188,7 +188,7 @@ class _MovieDetailState extends State<MovieDetail> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Container(
-                            color: Constant.whiteOpacity75,
+                            color: Constant.colorWhiteOpacity75,
                             child: Padding(
                               padding: const EdgeInsets.all(Constant.paddingSM),
                               child: Column(
@@ -200,7 +200,7 @@ class _MovieDetailState extends State<MovieDetail> {
                                     fontSize: Constant.fontSizeMD,
                                   ),
                                   const Divider(
-                                    color: Constant.black,
+                                    color: Constant.colorBlack,
                                   ),
                                   CommonText(
                                     movieDetail?.overview ?? "",
@@ -216,12 +216,12 @@ class _MovieDetailState extends State<MovieDetail> {
                             "More like this",
                             fontWeight: FontWeight.bold,
                             fontSize: Constant.fontSizeMD,
-                            textColor: Constant.white,
+                            textColor: Constant.colorWhite,
                             textAlign: TextAlign.start,
                           ),
                         ),
                         const Divider(
-                          color: Constant.white,
+                          color: Constant.colorWhite,
                         ),
                         similarMovieLoading
                             ? const CommonSpinner()
