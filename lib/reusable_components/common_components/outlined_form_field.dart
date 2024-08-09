@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb_app/helpers/constant.dart';
-import 'package:tmdb_app/helpers/type_helper.dart';
 
 class OutlinedFormField extends StatefulWidget {
   final TextEditingController inputController;
@@ -10,7 +9,7 @@ class OutlinedFormField extends StatefulWidget {
   final Icon? prefixIcon;
   final Widget? suffixIcon;
   final BorderSide? borderSide;
-  final OnChangeStr? onChange;
+  final Function(String)? onChange;
   final bool? disabled;
   final double? fontSize;
   final Color? labelColor;
