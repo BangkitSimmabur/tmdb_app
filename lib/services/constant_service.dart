@@ -5,7 +5,6 @@ class ConstantService with ChangeNotifier {
 
   String? sessionID;
   String? userID;
-  String? activeUri;
   SecureStorageHelper storageHelper = SecureStorageHelper();
 
   ConstantService() {
