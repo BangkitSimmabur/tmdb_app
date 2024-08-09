@@ -7,24 +7,30 @@ class CommonText extends StatelessWidget {
   final Color? textColor;
   final FontWeight? fontWeight;
   final TextAlign? textAlign;
+  final TextOverflow? overflow;
+  final int? maxLines;
 
   const CommonText(
-      this.text, {
-        super.key,
-        this.fontSize = Constant.fontSizeSM,
-        this.textColor = Constant.colorBlack,
-        this.fontWeight,
-        this.textAlign,
-      });
+    this.text, {
+    super.key,
+    this.fontSize = Constant.fontSizeSM,
+    this.textColor = Constant.colorBlack,
+    this.fontWeight,
+    this.textAlign,
+    this.overflow,
+    this.maxLines,
+  });
 
   @override
   Widget build(BuildContext context) => Text(
-    text,
-    style: TextStyle(
-      fontSize: fontSize,
-      color: textColor,
-      fontWeight: fontWeight,
-    ),
-    textAlign: textAlign,
-  );
+        text,
+        maxLines: maxLines,
+        style: TextStyle(
+          fontSize: fontSize,
+          color: textColor,
+          fontWeight: fontWeight,
+          overflow: overflow,
+        ),
+        textAlign: textAlign,
+      );
 }
