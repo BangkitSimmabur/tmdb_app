@@ -35,6 +35,15 @@ class AuthService extends NetworkService {
       sessionLog.data["session_id"],
     );
 
+
+    if (userLog.data["id"] != null) {
+      constantService.userID = userLog.data["id"];
+      SecureStorageHelper.writeSecureStorage(
+        "userID",
+        userLog.data["id"].toString(),
+      );
+    }
+
     return userLog;
   }
 
@@ -86,14 +95,6 @@ class AuthService extends NetworkService {
   Future<HandlingServerLog> retrieveUserFromSession(String sessionId) async {
     HandlingServerLog serverLog = await doHttpGet(
         '/account?api_key=${Constant.tmdbApiKey}&session_id=$sessionId');
-
-    if (serverLog.data["id"] != null) {
-      constantService.userID = serverLog.data["id"];
-      SecureStorageHelper.writeSecureStorage(
-        "userID",
-        serverLog.data["id"].toString(),
-      );
-    }
 
     return serverLog;
   }
