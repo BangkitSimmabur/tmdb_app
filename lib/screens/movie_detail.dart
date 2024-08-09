@@ -135,7 +135,7 @@ class _MovieDetailState extends State<MovieDetail> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: Constant.paddingXXS),
                                 child: CustomOutlinedButton(
-                                  "+ Watchlist",
+                                  labelText: "+ Watchlist",
                                   onTap: () {},
                                   buttonColor: Constant.colorBlack,
                                   borderColor: Constant.colorWhite,
@@ -149,7 +149,7 @@ class _MovieDetailState extends State<MovieDetail> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: Constant.paddingXXS),
                                 child: CustomOutlinedButton(
-                                  "+ Favorite",
+                                  labelText: "+ Favorite",
                                   onTap: () {},
                                   buttonColor: Constant.colorBlack,
                                   borderColor: Constant.colorWhite,
