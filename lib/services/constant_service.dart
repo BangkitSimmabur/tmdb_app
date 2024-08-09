@@ -4,7 +4,8 @@ import 'package:tmdb_app/helpers/secure_storage_helper.dart';
 
 class ConstantService with ChangeNotifier {
 
-  String? token;
+  String? sessionID;
+  String? userID;
   String? activeUri;
   SecureStorageHelper storageHelper = SecureStorageHelper();
 
@@ -13,10 +14,11 @@ class ConstantService with ChangeNotifier {
   }
 
   Future<void> initClient() async {
-    token = await storageHelper.getSecureStorage("jwt");
+    sessionID = await storageHelper.getSecureStorage("sessionID");
+    userID = await storageHelper.getSecureStorage("userID");
     notifyListeners();
 
-    return developer.log('Current token: $token');
+    return;
   }
 
 }
