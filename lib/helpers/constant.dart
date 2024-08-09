@@ -14,7 +14,7 @@ class Constant {
   static const Color colorGreyBorder = Color(0xffECECEC);
   static const Color colorLightGrey = Color(0xffe3e3e3);
   static const Color colorDarkGrey = Color(0xffc8c8c8);
-  static const Color darkRed = Color(0xffc61439);
+  static const Color colorDarkRed = Color(0xffc61439);
   static const Color colorRed = Color(0xffff0000);
   static const Color colorBlack = Color(0xff000000);
   static const Color colorWhite = Color(0xffffffff);
