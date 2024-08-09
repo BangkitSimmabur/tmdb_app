@@ -10,7 +10,6 @@ import 'package:tmdb_app/helpers/constant.dart';
 import 'package:tmdb_app/helpers/platform_helper.dart';
 import 'package:tmdb_app/helpers/server_helper.dart';
 import 'package:tmdb_app/services/auth_service.dart';
-import 'package:tmdb_app/services/constant_service.dart';
 import 'package:tmdb_app/services/navigation_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
