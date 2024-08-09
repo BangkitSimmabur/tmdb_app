@@ -39,8 +39,26 @@ class _HomeScreenState extends State<HomeScreen> {
     _movieService = Provider.of<MovieService>(context);
     _constantService = Provider.of<ConstantService>(context);
     return Scaffold(
-      appBar: const CommonAppBar(
-        "home",
+      appBar: CommonAppBar(
+        "Home",
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: Constant.paddingXXS),
+            child: IconButton(
+              onPressed: () {
+                if (_constantService.sessionID != null &&
+                    _constantService.userID != null) {
+                  PlatformHelper.transitionToPage(
+                      context, const ProfileScreen());
+                  return;
+                }
+                PlatformHelper.transitionToPage(context, const LoginScreen());
+              },
+              icon: const Icon(Icons.person),
+              color: Constant.white,
+            ),
+          ),
+        ],
       ),
       backgroundColor: Constant.black,
       body: SingleChildScrollView(
