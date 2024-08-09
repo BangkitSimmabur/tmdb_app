@@ -1,4 +1,3 @@
-import 'dart:developer' as developer;
 import 'package:flutter/foundation.dart';
 import 'package:tmdb_app/helpers/secure_storage_helper.dart';
 
