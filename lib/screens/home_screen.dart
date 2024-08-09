@@ -1,11 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tmdb_app/components/common_components/common_app_bar.dart';
 import 'package:tmdb_app/components/common_components/common_spinner.dart';
 import 'package:tmdb_app/components/common_components/common_text.dart';
 import 'package:tmdb_app/components/movie_card.dart';
 import 'package:tmdb_app/helpers/constant.dart';
+import 'package:tmdb_app/helpers/platform_helper.dart';
 import 'package:tmdb_app/models/movie.dart';
+import 'package:tmdb_app/screens/login_screen.dart';
+import 'package:tmdb_app/screens/profile_screen.dart';
+import 'package:tmdb_app/services/constant_service.dart';
 import 'package:tmdb_app/services/movie_service.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late MovieService _movieService;
+  late ConstantService _constantService;
   bool nowPlayingLoading = true;
   bool popularLoading = true;
   List<Movie> nowPlaying = [];
@@ -31,17 +37,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     _movieService = Provider.of<MovieService>(context);
+    _constantService = Provider.of<ConstantService>(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Constant.black,
-        elevation: 0,
-        title: const CommonText(
-          "HOME",
-          fontSize: Constant.fontSizeXL,
-          textColor: Constant.white,
-          fontWeight: FontWeight.bold,
-        ),
-        centerTitle: true,
+      appBar: const CommonAppBar(
+        "home",
       ),
       backgroundColor: Constant.black,
       body: SingleChildScrollView(
