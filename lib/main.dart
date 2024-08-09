@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
-import 'package:tmdb_app/screens/home_screen.dart';
+import 'package:tmdb_app/screens/home/home_screen.dart';
 import 'package:tmdb_app/services/auth_service.dart';
 import 'package:tmdb_app/services/constant_service.dart';
 import 'package:tmdb_app/services/movie_service.dart';
