@@ -17,8 +17,10 @@ class NetworkService with ChangeNotifier {
       };
     }
 
-    http.Response response =
-        await http.get(Uri.parse("${Constant.baseUrl}$url"), headers: header);
+    http.Response response = await http.get(
+      Uri.parse("${Constant.baseUrl}$url"),
+      headers: header,
+    );
 
     var resBody = json.decode(response.body);
     return HandlingServerLog(
@@ -45,9 +47,10 @@ class NetworkService with ChangeNotifier {
     }
 
     http.Response response = await http.post(
-        Uri.parse("${Constant.baseUrl}$url"),
-        body: requestBody,
-        headers: header);
+      Uri.parse("${Constant.baseUrl}$url"),
+      body: requestBody,
+      headers: header,
+    );
 
     var resBody = json.decode(response.body);
     return HandlingServerLog(
@@ -80,9 +83,10 @@ class NetworkService with ChangeNotifier {
     }
 
     http.Response response = await http.put(
-        Uri.parse("${Constant.baseUrl}$url"),
-        body: requestBody,
-        headers: header);
+      Uri.parse("${Constant.baseUrl}$url"),
+      body: requestBody,
+      headers: header,
+    );
 
     var resBody = json.decode(response.body);
     return HandlingServerLog(
