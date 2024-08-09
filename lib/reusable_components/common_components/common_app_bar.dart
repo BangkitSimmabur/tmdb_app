@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb_app/components/common_components/common_text.dart';
 import 'package:tmdb_app/helpers/constant.dart';
+import 'package:tmdb_app/reusable_components/common_components/common_text.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
