@@ -1,13 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tmdb_app/components/common_components/common_app_bar.dart';
-import 'package:tmdb_app/components/common_components/common_spinner.dart';
-import 'package:tmdb_app/components/common_components/common_text.dart';
-import 'package:tmdb_app/components/movie_card.dart';
 import 'package:tmdb_app/helpers/constant.dart';
 import 'package:tmdb_app/helpers/platform_helper.dart';
 import 'package:tmdb_app/models/movie.dart';
+import 'package:tmdb_app/reusable_components/common_components/common_app_bar.dart';
+import 'package:tmdb_app/reusable_components/common_components/common_spinner.dart';
+import 'package:tmdb_app/reusable_components/common_components/common_text.dart';
+import 'package:tmdb_app/reusable_components/movie_card.dart';
 import 'package:tmdb_app/screens/login_screen.dart';
 import 'package:tmdb_app/screens/profile_screen.dart';
 import 'package:tmdb_app/services/constant_service.dart';

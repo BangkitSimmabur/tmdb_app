@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:provider/provider.dart';
-import 'package:tmdb_app/components/common_components/common_spinner.dart';
-import 'package:tmdb_app/components/common_components/common_text.dart';
-import 'package:tmdb_app/components/common_components/outline_button.dart';
-import 'package:tmdb_app/components/movie_card.dart';
 import 'package:tmdb_app/helpers/constant.dart';
 import 'package:tmdb_app/helpers/platform_helper.dart';
 import 'package:tmdb_app/models/movie.dart';
+import 'package:tmdb_app/reusable_components/common_components/common_spinner.dart';
+import 'package:tmdb_app/reusable_components/common_components/common_text.dart';
+import 'package:tmdb_app/reusable_components/common_components/outline_button.dart';
+import 'package:tmdb_app/reusable_components/movie_card.dart';
 import 'package:tmdb_app/services/movie_service.dart';
 
 class MovieDetail extends StatefulWidget {
