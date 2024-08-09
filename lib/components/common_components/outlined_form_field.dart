@@ -13,6 +13,8 @@ class OutlinedFormField extends StatefulWidget {
   final OnChangeStr? onChange;
   final bool? disabled;
   final double? fontSize;
+  final Color? labelColor;
+  final Color? focussedColor;
 
   const OutlinedFormField({
     super.key,
@@ -25,7 +27,9 @@ class OutlinedFormField extends StatefulWidget {
     this.inputType,
     this.suffixIcon,
     this.disabled = false,
-    this.fontSize,
+    this.fontSize =  Constant.fontSizeSM,
+    this.labelColor = Constant.white,
+    this.focussedColor = Constant.white,
   });
   @override
   State<OutlinedFormField> createState() => _OutlinedFormFieldState();
@@ -41,7 +45,8 @@ class _OutlinedFormFieldState extends State<OutlinedFormField> {
       controller: widget.inputController,
       onChanged: widget.onChange,
       style: TextStyle(
-        fontSize: widget.fontSize ?? Constant.fontSizeSM,
+        fontSize: widget.fontSize,
+        color: widget.labelColor,
       ),
       decoration: InputDecoration(
         isDense: true,
@@ -73,6 +78,7 @@ class _OutlinedFormFieldState extends State<OutlinedFormField> {
             4,
           ),
         ),
+        focusColor: widget.focussedColor,
         hintText: widget.hintText,
         hintStyle: const TextStyle(color: Constant.greyText,),
         prefixIcon: widget.prefixIcon,
