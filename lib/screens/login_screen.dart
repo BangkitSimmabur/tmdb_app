@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 import 'package:tmdb_app/components/common_components/button_full.dart';
 import 'package:tmdb_app/components/common_components/common_app_bar.dart';
 import 'package:tmdb_app/components/common_components/common_text.dart';
 import 'package:tmdb_app/components/common_components/outlined_form_field.dart';
 import 'package:tmdb_app/helpers/constant.dart';
+import 'package:tmdb_app/helpers/platform_helper.dart';
+import 'package:tmdb_app/helpers/server_helper.dart';
+import 'package:tmdb_app/services/auth_service.dart';
+import 'package:tmdb_app/services/constant_service.dart';
 import 'package:tmdb_app/services/navigation_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,7 +22,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _emailController = TextEditingController();
+  late AuthService _authService;
+  final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _navigatorKey = GlobalKey<NavigatorState>();
   final _locatorModel = GetIt.I<NavigationService>();
@@ -24,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _userNameController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -38,13 +45,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _authService = Provider.of<AuthService>(context);
     return Scaffold(
-      backgroundColor: Constant.black,
+      backgroundColor: Constant.colorBlack,
       appBar: const CommonAppBar(
         "Log in",
       ),
       body: Form(
-        child:  Padding(
+        child: Padding(
           padding: const EdgeInsets.only(
             left: 50,
             right: 50,
@@ -57,10 +65,9 @@ class _LoginScreenState extends State<LoginScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15.0),
                 child: OutlinedFormField(
-                  inputController: _emailController,
-                  hintText: "Email",
-                  prefixIcon: const Icon(FontAwesomeIcons.at),
-                  inputType: TextInputType.emailAddress,
+                  inputController: _userNameController,
+                  hintText: "User name",
+                  prefixIcon: const Icon(FontAwesomeIcons.person),
                 ),
               ),
               Padding(
@@ -70,6 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: "Password",
                   prefixIcon: const Icon(FontAwesomeIcons.lock),
                   inputType: TextInputType.text,
+                  obscureText: _isPasswordVisible,
                   suffixIcon: GestureDetector(
                     onTap: () {
                       setState(() {
@@ -93,13 +101,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     labelColor: Colors.black,
                     labelSize: 16,
                     labelWeight: FontWeight.w600,
-                    buttonColor: Constant.white,
+                    buttonColor: Constant.colorWhite,
                     borderRadius: 4,
-                    onClick: () {
-                      // _onLogin();
-                    },
+                    onClick: _onLogin,
                     btnBorderSide:
-                    const BorderSide(width: 4, color: Constant.white),
+                        const BorderSide(width: 4, color: Constant.colorWhite),
                   ),
                 ),
               ),
@@ -111,10 +117,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     const CommonText(
                       "Don't have an account? ",
                       fontSize: Constant.fontSizeXS,
-                      textColor: Constant.greyText,
+                      textColor: Constant.colorGreyText,
                     ),
                     GestureDetector(
-                      // onTap: _onNavigateRegister,
+                      onTap: _onNavigateRegister,
                       child: const CommonText(
                         "Register here",
                         textColor: Constant.darkRed,
@@ -132,5 +138,37 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _onLogin() async {
+    PlatformHelper.showLoadingAlert(context, 'Login');
+
+    HandlingServerLog result = await _authService.login(
+      _userNameController.text,
+      _passwordController.text,
+    );
+
+    mounted ? PlatformHelper.backTransitionPage(context) : {};
+
+    /// If failed logging in show error message
+    if (result.success == false && mounted) {
+      PlatformHelper.showErrorSnackbar(
+          context, "Failed to login, please try again");
+    }
+
+    mounted ? PlatformHelper.backTransitionPage(context) : {};
+
+    return;
+  }
+
+  Future<void> _onNavigateRegister() async {
+    final Uri urlParsed = Uri.parse(Constant.tmdbRegisterUrl);
+
+    if (await canLaunchUrl(urlParsed)) {
+      await launchUrl(urlParsed);
+    } else {
+      throw 'Could not launch url';
+    }
+    return;
   }
 }

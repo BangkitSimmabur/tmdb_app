@@ -45,17 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.only(right: Constant.paddingXXS),
             child: IconButton(
-              onPressed: () {
-                if (_constantService.sessionID != null &&
-                    _constantService.userID != null) {
-                  PlatformHelper.transitionToPage(
-                      context, const ProfileScreen());
-                  return;
-                }
-                PlatformHelper.transitionToPage(context, const LoginScreen());
-              },
+              onPressed: _onNavigateToProfile,
               icon: const Icon(Icons.person),
-              color: Constant.white,
+              color: Constant.colorWhite,
             ),
           ),
         ],
@@ -148,5 +140,13 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     return listWidgets;
+  }
+
+  void _onNavigateToProfile() {
+    if (_constantService.sessionID != null && _constantService.userID != null) {
+      PlatformHelper.transitionToPage(context, const ProfileScreen());
+      return;
+    }
+    PlatformHelper.transitionToPage(context, const LoginScreen());
   }
 }

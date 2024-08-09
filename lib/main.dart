@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdb_app/screens/home_screen.dart';
+import 'package:tmdb_app/services/auth_service.dart';
 import 'package:tmdb_app/services/constant_service.dart';
 import 'package:tmdb_app/services/movie_service.dart';
 import 'package:tmdb_app/services/navigation_service.dart';
@@ -62,6 +63,9 @@ class MyAppState extends State<MyApp> {
         ChangeNotifierProvider<MovieService>(
           create: (_) => MovieService(_constantService),
         ),
+        ChangeNotifierProvider<AuthService>(
+          create: (_) => AuthService(_constantService),
+        ),
       ],
       child: RefreshConfiguration(
         headerBuilder: () => const MaterialClassicHeader(),
@@ -69,7 +73,7 @@ class MyAppState extends State<MyApp> {
           loadStyle: LoadStyle.ShowAlways,
         ),
         child: MaterialApp(
-          title: 'Flutter Demo',
+          title: 'TMDB APP',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
