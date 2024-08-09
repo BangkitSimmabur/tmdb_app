@@ -35,7 +35,6 @@ class AuthService extends NetworkService {
       sessionLog.data["session_id"],
     );
 
-
     if (userLog.data["id"] != null) {
       constantService.userID = userLog.data["id"];
       SecureStorageHelper.writeSecureStorage(
@@ -48,8 +47,8 @@ class AuthService extends NetworkService {
   }
 
   Future<HandlingServerLog> getRequestToken() async {
-    HandlingServerLog serverLog =
-        await doHttpGet('/authentication/token/new?api_key=${Constant.tmdbApiKey}');
+    HandlingServerLog serverLog = await doHttpGet(
+        '/authentication/token/new?api_key=${Constant.tmdbApiKey}');
 
     return serverLog;
   }
