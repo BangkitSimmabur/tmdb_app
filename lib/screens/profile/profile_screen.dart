@@ -9,7 +9,6 @@ import 'package:tmdb_app/reusable_components/common_components/common_app_bar.da
 import 'package:tmdb_app/reusable_components/common_components/common_text.dart';
 import 'package:tmdb_app/screens/profile/profile_movies_component.dart';
 import 'package:tmdb_app/services/auth_service.dart';
-import 'package:tmdb_app/services/constant_service.dart';
 import 'package:tmdb_app/services/movie_service.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -21,7 +20,6 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late MovieService _movieService;
-  late ConstantService _constantService;
   late AuthService _authService;
   final favoriteScrollController = ScrollController();
   final watchListScrollController = ScrollController();
@@ -62,7 +60,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     _movieService = Provider.of<MovieService>(context);
-    _constantService = Provider.of<ConstantService>(context);
     _authService = Provider.of<AuthService>(context);
 
     return Scaffold(
