@@ -19,6 +19,11 @@ This app was developed using Flutter and TMDB APIs. In this app, users can view 
    cd tmdb_app
    ```
 4. Run `flutter pub get` to fetch all dependencies.
+5. To view the documentation, run:
+   ```bash
+   dart doc
+   ```
+   After it finishes running, it will generate HTML files in the `doc` directory located in the project folder. To view the documentation, open `index.html` in the `doc` directory.
 
 ## Technologies Used
 - **Framework**: Flutter version 3.13.7
