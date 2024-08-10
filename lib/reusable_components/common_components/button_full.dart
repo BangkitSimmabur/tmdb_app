@@ -17,7 +17,6 @@ class CustomButtonFullBordered extends StatefulWidget {
   final int maxLines;
   final double height;
   final BorderSide? btnBorderSide;
-  // Border btnBorder;
   final FontWeight labelWeight;
   final TextOverflow textOverflow;
 
