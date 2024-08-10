@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(Constant.paddingXS),
           child: Column(
             children: [
               const CommonText(
