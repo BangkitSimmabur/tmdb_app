@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdb_app/helpers/constant.dart';
 import 'package:tmdb_app/helpers/platform_helper.dart';
@@ -10,7 +9,6 @@ import 'package:tmdb_app/reusable_components/common_components/common_app_bar.da
 import 'package:tmdb_app/reusable_components/common_components/common_text.dart';
 import 'package:tmdb_app/reusable_components/common_components/outlined_form_field.dart';
 import 'package:tmdb_app/services/auth_service.dart';
-import 'package:tmdb_app/services/navigation_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,9 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   late AuthService _authService;
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final _navigatorKey = GlobalKey<NavigatorState>();
-  final _locatorModel = GetIt.I<NavigationService>();
-  bool _isPasswordVisible = false;
+  bool _isPasswordVisible = true;
 
   @override
   void dispose() {
@@ -37,8 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    if (_locatorModel.navigatorKey.currentContext != null) return;
-    _locatorModel.navigatorKey = _navigatorKey;
     super.initState();
   }
 
@@ -85,8 +79,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: Icon(
                       _isPasswordVisible
-                          ? FontAwesomeIcons.eyeSlash
-                          : FontAwesomeIcons.eye,
+                          ? FontAwesomeIcons.eye
+                          : FontAwesomeIcons.eyeSlash,
                     ),
                   ),
                 ),
