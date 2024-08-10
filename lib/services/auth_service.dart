@@ -97,4 +97,23 @@ class AuthService extends NetworkService {
 
     return serverLog;
   }
+
+  Future<void> removeSession() async {
+    Map<String, String> reqBody = {
+      "session_id":  "",
+    };
+
+    await doHttpDelete(
+        '/authentication/session?api_key=${Constant.tmdbApiKey}',
+        reqBody);
+
+    SecureStorageHelper.deleteSecureStorage(
+      "sessionID",
+    );
+    SecureStorageHelper.deleteSecureStorage(
+      "userID",
+    );
+    notifyListeners();
+    return;
+  }
 }
