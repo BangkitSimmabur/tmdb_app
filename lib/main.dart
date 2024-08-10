@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
+import 'package:tmdb_app/helpers/constant.dart';
 import 'package:tmdb_app/screens/home/home_screen.dart';
 import 'package:tmdb_app/services/auth_service.dart';
 import 'package:tmdb_app/services/movie_service.dart';
@@ -64,7 +65,7 @@ class MyAppState extends State<MyApp> {
       child: MaterialApp(
         title: 'TMDB APP',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: Constant.colorRed),
           useMaterial3: true,
         ),
         onGenerateRoute: (route) => _routeMap[route.name](
