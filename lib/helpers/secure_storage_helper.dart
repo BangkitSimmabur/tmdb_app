@@ -15,4 +15,11 @@ class SecureStorageHelper {
   static Future<void> deleteSecureStorage(String key) async {
     await const FlutterSecureStorage().delete(key: key);
   }
+
+  static Future<String?> getSession() async {
+    return await const FlutterSecureStorage().read(key: "sessionID");
+  }
+  static Future<String?> getUserID() async {
+    return await const FlutterSecureStorage().read(key: "userID");
+  }
 }
