@@ -90,8 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     isLoading: favoriteLoading,
                     scrollController: favoriteScrollController,
                     movies: favoriteMovies,
-                      onRemoveFromList: onRemoveFavoriteMovie,
-                      // onRemoveFromList: (123){},
+                    onRemoveFromList: onRemoveFavoriteMovie,
                   ),
                   const Padding(
                     padding:
