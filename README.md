@@ -1,5 +1,3 @@
-
-```markdown
 # TMDB APP
 
 ## Description
@@ -51,4 +49,3 @@ No license.
 
 ## Contact
 For questions or contributions, please email [bkt.simmabur@gmail.com](mailto:bkt.simmabur@gmail.com).
-```
