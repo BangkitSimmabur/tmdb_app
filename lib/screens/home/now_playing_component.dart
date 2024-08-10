@@ -91,7 +91,7 @@ class HomeNowPlayingMovies extends StatelessWidget {
         enlargeCenterPage: true,
         viewportFraction: 0.55,
         autoPlayCurve: Curves.fastLinearToSlowEaseIn,
-        autoPlayAnimationDuration: const Duration(seconds: 2),
+        autoPlayAnimationDuration: const Duration(seconds: 10),
       ),
     );
   }
