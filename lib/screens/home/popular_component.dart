@@ -65,6 +65,7 @@ class HomePopularMovies extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: CustomOutlinedButton(
+                            labelText: "Watch List",
                             icon: FontAwesomeIcons.plus,
                             onTap: () => onAddWatchList(movie.id),
                             buttonColor: Constant.colorBlackOpacity75,
@@ -77,6 +78,7 @@ class HomePopularMovies extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: CustomOutlinedButton(
+                            labelText: "Image",
                             icon: FontAwesomeIcons.download,
                             onTap: () => onSaveImage(
                                 "${Constant.imagePathOriginal}/${movie.posterPath}"),
