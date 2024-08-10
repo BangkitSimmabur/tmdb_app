@@ -68,13 +68,14 @@ class _MovieDetailState extends State<MovieDetail> {
                       ),
                     ),
                   ),
-                  expandedHeight: MediaQuery.sizeOf(context).height *2/5,
+                  expandedHeight: MediaQuery.sizeOf(context).height * 2 / 5,
                   pinned: true,
                   flexibleSpace: FlexibleSpaceBar(
                     titlePadding: const EdgeInsets.all(0),
                     centerTitle: true,
                     title: ClipRRect(
-                      borderRadius: BorderRadius.circular(Constant.borderRadiusSM),
+                      borderRadius:
+                          BorderRadius.circular(Constant.borderRadiusSM),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: Constant.paddingXS,
@@ -226,9 +227,9 @@ class _MovieDetailState extends State<MovieDetail> {
                         similarMovieLoading
                             ? const CommonSpinner()
                             : Wrap(
-                          alignment: WrapAlignment.spaceBetween,
-                          children: listSimilarMovies,
-                        ),
+                                alignment: WrapAlignment.spaceBetween,
+                                children: listSimilarMovies,
+                              ),
                       ],
                     ),
                   ),
@@ -245,7 +246,8 @@ class _MovieDetailState extends State<MovieDetail> {
       movieDetail = fetchMovieDetail;
     });
 
-    var fetchSimilarMovies = await _movieService.getMovieByGenres(getGenreIds());
+    var fetchSimilarMovies =
+        await _movieService.getMovieByGenres(getGenreIds());
     setState(() {
       similarMovieLoading = false;
       similarMovies = fetchSimilarMovies;
@@ -259,6 +261,7 @@ class _MovieDetailState extends State<MovieDetail> {
     }
     return "";
   }
+
   List<int?> getGenreIds() {
     if (movieDetail!.genres!.isNotEmpty) {
       return movieDetail!.genres!.map((e) => e.id).toList();
@@ -273,9 +276,9 @@ class _MovieDetailState extends State<MovieDetail> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: Constant.paddingMD),
           child: SizedBox(
-            height: MediaQuery.sizeOf(context).height* 0.3,
+            height: MediaQuery.sizeOf(context).height * 0.3,
             child: MovieCard(
-              movie: movie,
+              movie,
             ),
           ),
         ),

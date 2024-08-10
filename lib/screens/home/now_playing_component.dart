@@ -32,7 +32,7 @@ class HomeNowPlayingMovies extends StatelessWidget {
                 height: 300,
                 width: 210,
                 child: MovieCard(
-                  movie: nowPlayingMovies[index],
+                  nowPlayingMovies[index],
                 ),
               ),
               Align(

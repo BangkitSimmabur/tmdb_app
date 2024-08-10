@@ -78,4 +78,12 @@ class MovieService extends NetworkService {
 
     return serverLog;
   }
+  // account/8314267/favorite/movies?language=en-US&page=1&session_id=546114646e850200cc707538f2465478400eb45e&sort_by=created_at.asc
+
+  Future<HandlingServerLog> getFavoriteMovies(int page) async {
+    HandlingServerLog serverLog = await doHttpGet(
+        '/account/${constantService.userID}/favorite/movies?language=en-US&page=$page&session_id=${constantService.sessionID}&sort_by=created_at.asc&api_key=${Constant.tmdbApiKey}');
+
+    return serverLog;
+  }
 }

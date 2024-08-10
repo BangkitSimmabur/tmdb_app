@@ -7,9 +7,9 @@ import 'package:tmdb_app/screens/movie_detail.dart';
 class MovieCard extends StatelessWidget {
   final Movie movie;
 
-  const MovieCard({
+  const MovieCard(
+    this.movie, {
     super.key,
-    required this.movie,
   });
 
   @override

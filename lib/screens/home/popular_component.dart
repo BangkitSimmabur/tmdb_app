@@ -41,7 +41,7 @@ class HomePopularMovies extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.sizeOf(context).height * 2 / 3,
                   child: MovieCard(
-                    movie: movie,
+                    movie,
                   ),
                 ),
                 Align(
