@@ -186,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (result.success == true && result.status == 1) {
       mounted
-          ? PlatformHelper.showErrorSnackbar(
+          ? PlatformHelper.showSuccessSnackbar(
               context, "Movie is added to favorites")
           : {};
       return;
@@ -225,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (result.success == true && result.status == 1) {
       mounted
-          ? PlatformHelper.showErrorSnackbar(
+          ? PlatformHelper.showSuccessSnackbar(
               context, "Movie is added to your watch list")
           : {};
       return;

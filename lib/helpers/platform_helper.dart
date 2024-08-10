@@ -61,9 +61,9 @@ class PlatformHelper {
       backgroundColor: backgroundColor ?? Constant.colorWhite,
       messageColor: textColor ?? Constant.colorBlack,
       isDismissible: true,
-      icon: const Icon(
+      icon: Icon(
         Icons.done,
-        color: Colors.white,
+        color: textColor ?? Constant.colorBlack,
       ),
     ).show(context);
   }
