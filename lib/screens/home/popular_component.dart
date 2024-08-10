@@ -68,7 +68,7 @@ class HomePopularMovies extends StatelessWidget {
                             labelText: "Watch List",
                             icon: FontAwesomeIcons.plus,
                             onTap: () => onAddWatchList(movie.id),
-                            buttonColor: Constant.colorBlackOpacity75,
+                            buttonColor: Constant.colorBlackOpacity50,
                             borderColor: Constant.colorWhiteOpacity75,
                             labelColor: Constant.colorWhiteOpacity75,
                           ),
