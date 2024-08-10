@@ -37,6 +37,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, initDataState);
+
+    // event listener when scrolling to the of list
     favoriteScrollController.addListener(() {
       if (favoriteScrollController.position.maxScrollExtent ==
           favoriteScrollController.offset) {
@@ -125,8 +127,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               buttonColor: Constant.colorWhite,
               borderRadius: 4,
               onClick: logOut,
-              btnBorderSide:
-                  const BorderSide(width: 4, color: Constant.colorWhite),
             ),
           ),
         ],
@@ -134,6 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  /// Action ran when the page first load fetching movies from watch list and favorite list
   Future initDataState() async {
     fetchFavoriteMovie();
     fetchWatchList();
@@ -158,6 +159,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         favoritePage = favoritePage + 1;
       });
 
+      // If the last page reached
       if (favoritePage > serverLog.data["total_pages"]!) {
         setState(() {
           canFetchFavorite = false;
@@ -189,6 +191,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         watchListMovies = [...watchListMovies, ...movies ?? []];
         watchListPage = watchListPage + 1;
       });
+
+      // If the last page reached
       if (watchListPage > serverLog.data["total_pages"]) {
         setState(() {
           canFetchWatchlist = false;
@@ -202,6 +206,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return;
   }
 
+  /// Action called when the trash icon button pressed on favorite movies
   Future<void> onRemoveFavoriteMovie(int? id) async {
     PlatformHelper.showLoadingAlert(context, 'Removing movie from favorites');
 
@@ -231,6 +236,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return;
   }
 
+  /// Action called when the trash icon button pressed on watch list
   Future<void> onRemoveWatchList(int? id) async {
     PlatformHelper.showLoadingAlert(context, 'Removing movie from watch list');
 
@@ -261,11 +267,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return;
   }
 
+  /// Action called when Log out button pressed, deleting session from tmdb and remove it from device
   Future<void> logOut() async {
     await _authService.removeSession();
 
     mounted
-        ? PlatformHelper.transitionToPage(context, HomeScreen(), newPage: true)
+        ? PlatformHelper.transitionToPage(context, const HomeScreen(), newPage: true)
         : {};
   }
 }

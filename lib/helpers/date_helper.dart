@@ -1,4 +1,6 @@
+/// Helper class to handle date conversion
 class DateHelper {
+  /// Function to convert String to date iso or date iso to String
   static dynamic convertDateAndIsoString(dynamic dateIso) {
     if (dateIso == null) return null;
 

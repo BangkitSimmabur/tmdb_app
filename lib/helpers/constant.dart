@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Class containing constant variables for the app
 class Constant {
   //font Sizes
   static const double fontSizeXXS = 12.0;

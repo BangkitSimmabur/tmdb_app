@@ -6,10 +6,18 @@ import 'package:tmdb_app/models/movie.dart';
 import 'package:tmdb_app/reusable_components/common_components/outline_button.dart';
 import 'package:tmdb_app/reusable_components/movie_card.dart';
 
+/// Carousel component displaying movies currently played limited to 6 movies max
 class HomeNowPlayingMovies extends StatelessWidget {
+  /// The movie list fetched from tmdb api
   final List<Movie> nowPlayingMovies;
+
+  /// Action when the watch list button pressed
   final Future<void> Function(int?) onAddWatchList;
+
+  /// Action when the icon favorite button pressed
   final Future<void> Function(int?) onAddFavorite;
+
+  /// Action when the download button pressed
   final Future<void> Function(String) onSaveImage;
 
   const HomeNowPlayingMovies(

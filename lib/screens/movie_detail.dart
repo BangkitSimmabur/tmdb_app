@@ -10,12 +10,15 @@ import 'package:tmdb_app/reusable_components/common_components/outline_button.da
 import 'package:tmdb_app/reusable_components/movie_card.dart';
 import 'package:tmdb_app/services/movie_service.dart';
 
+/// Page to display movie details
 class MovieDetail extends StatefulWidget {
+  /// Movie id used to fetch the movie detail
+  final int movieId;
+
   const MovieDetail({
     super.key,
     required this.movieId,
   });
-  final int movieId;
 
   @override
   State<MovieDetail> createState() => _MovieDetailState();
@@ -239,6 +242,7 @@ class _MovieDetailState extends State<MovieDetail> {
     );
   }
 
+  /// Action called when the page load for the first time fetching the movie detail and a list of movies similar by genres
   Future initDataState() async {
     var fetchMovieDetail = await _movieService.getMovieDetail(widget.movieId);
     setState(() {
@@ -254,6 +258,7 @@ class _MovieDetailState extends State<MovieDetail> {
     });
   }
 
+  /// Function to get the genre ids of the movie, returning as a single String
   String getGenres() {
     var genres = movieDetail!.genres!.map((e) => e.name).toList();
     if (genres.isNotEmpty) {
@@ -262,6 +267,7 @@ class _MovieDetailState extends State<MovieDetail> {
     return "";
   }
 
+  /// Function to get the genre ids of the movie, returning as a list of int/ numbers
   List<int?> getGenreIds() {
     if (movieDetail!.genres!.isNotEmpty) {
       return movieDetail!.genres!.map((e) => e.id).toList();
@@ -269,6 +275,7 @@ class _MovieDetailState extends State<MovieDetail> {
     return [];
   }
 
+  /// List widget generated to display similar movie based on genres
   List<Widget> get listSimilarMovies {
     List<Widget> listWidgets = [];
     similarMovies?.asMap().forEach((int key, Movie movie) {

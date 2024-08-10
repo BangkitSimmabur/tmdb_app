@@ -5,10 +5,18 @@ import 'package:tmdb_app/models/movie.dart';
 import 'package:tmdb_app/reusable_components/common_components/outline_button.dart';
 import 'package:tmdb_app/reusable_components/movie_card.dart';
 
+/// Popular movie list displayed in vertical scrollable posters
 class HomePopularMovies extends StatelessWidget {
+  /// The movie list fetched from tmdb api
   final List<Movie> popularMovies;
+
+  /// Action when the watch list button pressed
   final Future<void> Function(int?) onAddWatchList;
+
+  /// Action when the icon favorite button pressed
   final Future<void> Function(int?) onAddFavorite;
+
+  /// Action when the download button pressed
   final Future<void> Function(String) onSaveImage;
 
   const HomePopularMovies(
@@ -36,8 +44,7 @@ class HomePopularMovies extends StatelessWidget {
           ),
           child: SizedBox(
             height: MediaQuery.sizeOf(context).height * 2 / 3,
-            width:
-                MediaQuery.sizeOf(context).width - (Constant.paddingSM * 2),
+            width: MediaQuery.sizeOf(context).width - (Constant.paddingSM * 2),
             child: Stack(
               children: [
                 SizedBox(

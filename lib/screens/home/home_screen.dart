@@ -38,6 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Future.delayed(Duration.zero, initDataState);
 
     FlDownloader.initialize();
+
+    // Event handler based on the status of image downloader
     progressStream = FlDownloader.progressStream.listen(
       (event) {
         if (event.status == DownloadStatus.successful) {
@@ -132,6 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  /// Function ran when the page was opened fetching movies currently playing and popular movies
   Future initDataState() async {
     var fetchNowPlaying = await _movieService.getNowPlaying();
     setState(() {
@@ -146,6 +149,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return;
   }
 
+  /// Action called when the profile icon button pressed
+  /// User will transition to Log in page if user haven't logged in
+  /// User will transition to Profile page if user already logged in
   void _onNavigateToProfile() async {
     if (await _checkLogin()) {
       mounted
@@ -158,6 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
         : {};
   }
 
+  ///Action called when pressing hte favorite icon button on movie card
   Future<void> onAddFavoriteMovie(int? id) async {
     if (await _checkLogin() == false) {
       mounted
@@ -174,6 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     mounted ? PlatformHelper.backTransitionPage(context) : {};
 
+    // If failed showing error message
     if (result.success == false) {
       mounted
           ? PlatformHelper.showErrorSnackbar(
@@ -225,6 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
       return;
     }
 
+    // If status success but movie is already in the watch list
     if (result.success == true && result.status == 12) {
       mounted
           ? PlatformHelper.showErrorSnackbar(
@@ -244,8 +253,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return;
   }
 
+  /// Function called to check the user's session
   Future<bool> _checkLogin() async {
+    /// Fetching the session id stored inside the secure storage
     var sessionID = await SecureStorageHelper.getSession();
+
+    /// Fetching the user id stored inside the secure storage
     var userID = await SecureStorageHelper.getUserID();
 
     if (userID == null || sessionID == null) {
@@ -254,7 +267,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return true;
   }
 
+  /// Action called when download button clicked asking
   Future<void> onDownloadImage(String url) async {
+
+    /// permission will only be asked for android below the version of 29
     var permission = await FlDownloader.requestPermission();
 
     if (permission == StoragePermissionStatus.granted) {

@@ -4,6 +4,7 @@ import 'package:tmdb_app/helpers/server_helper.dart';
 import 'package:tmdb_app/models/movie.dart';
 import 'package:tmdb_app/services/network_service.dart';
 
+/// A service class derived from Network service class to handle movie related api calls
 class MovieService extends NetworkService {
   MovieService();
 

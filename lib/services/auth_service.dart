@@ -3,12 +3,14 @@ import 'package:tmdb_app/helpers/secure_storage_helper.dart';
 import 'package:tmdb_app/helpers/server_helper.dart';
 import 'package:tmdb_app/services/network_service.dart';
 
+/// A service class derived from Network service class to handle user related api calls
 class AuthService extends NetworkService {
   AuthService();
 
   Future<HandlingServerLog> login(String userName, String password) async {
     HandlingServerLog tokenLog = await getRequestToken();
 
+    // stop the login process if fail to fetch request token
     if (!tokenLog.success!) {
       return tokenLog;
     }
@@ -19,6 +21,7 @@ class AuthService extends NetworkService {
       tokenLog.data['request_token'],
     );
 
+    // stop the login process if fail to authenticate user
     if (!loginLog.success!) {
       return loginLog;
     }
@@ -27,6 +30,7 @@ class AuthService extends NetworkService {
       loginLog.data['request_token'],
     );
 
+    // stop the login process if fail to create session for authenticated user
     if (!sessionLog.success!) {
       return sessionLog;
     }
@@ -36,6 +40,7 @@ class AuthService extends NetworkService {
     );
 
     if (userLog.data["id"] != null) {
+      // save user id to secure storage
       SecureStorageHelper.writeSecureStorage(
         "userID",
         userLog.data["id"].toString(),

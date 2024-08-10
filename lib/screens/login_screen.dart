@@ -98,8 +98,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     buttonColor: Constant.colorWhite,
                     borderRadius: 4,
                     onClick: _onLogin,
-                    btnBorderSide:
-                        const BorderSide(width: 4, color: Constant.colorWhite),
                   ),
                 ),
               ),

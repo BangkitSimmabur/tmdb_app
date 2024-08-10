@@ -6,7 +6,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tmdb_app/helpers/constant.dart';
 import 'package:tmdb_app/services/navigation_service.dart';
 
+/// Helper class to handle app snack bar message or transition
 class PlatformHelper {
+  /// Function used to navigate to different page
   static dynamic transitionToPage(
     BuildContext context,
     dynamic destination, {
@@ -28,6 +30,7 @@ class PlatformHelper {
     }
   }
 
+  /// Function used to pop/ transition to previous page with optional value sent to previous page
   static dynamic backTransitionPage(
     BuildContext context, {
     dynamic value,
@@ -44,6 +47,7 @@ class PlatformHelper {
     }
   }
 
+  /// Function to open snack bar with if an event/ process is successful
   static Future showSuccessSnackbar(
     BuildContext context,
     String content, {
@@ -68,6 +72,7 @@ class PlatformHelper {
     ).show(context);
   }
 
+  /// Function to open snack bar with if an event/ process is failed
   static Future<Flushbar?> showErrorSnackbar(
     BuildContext context,
     String content, {
@@ -102,6 +107,7 @@ class PlatformHelper {
     )..show(context);
   }
 
+  /// Function to show alert dialogue with loading indicator disabling app's action
   static Future<void>? showLoadingAlert(
     BuildContext context,
     String textInfo, {

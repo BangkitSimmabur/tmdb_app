@@ -5,10 +5,18 @@ import 'package:tmdb_app/models/movie.dart';
 import 'package:tmdb_app/reusable_components/common_components/common_spinner.dart';
 import 'package:tmdb_app/reusable_components/movie_card.dart';
 
+/// Custom movie list to display watch list or favorite list
 class ProfileMovieComponent extends StatelessWidget {
+  /// The movie list to be displayed either it is favorite list or watch list
   final List<Movie> movies;
+
+  /// The loading state when fetching data from api
   final bool isLoading;
+
+  /// The list scroll controller
   final ScrollController scrollController;
+
+  /// Action when the trash icon button pressed
   final Future<void> Function(int?) onRemoveFromList;
 
   const ProfileMovieComponent({

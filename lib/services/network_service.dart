@@ -4,9 +4,11 @@ import 'package:tmdb_app/helpers/constant.dart';
 import 'package:tmdb_app/helpers/server_helper.dart';
 import 'dart:convert';
 
+/// A service class used as the base class to handle http api calls
 class NetworkService with ChangeNotifier {
   NetworkService();
 
+  /// Function called to handle http get method
   Future<HandlingServerLog> doHttpGet(url) async {
     dynamic header;
     {
@@ -29,6 +31,7 @@ class NetworkService with ChangeNotifier {
     );
   }
 
+  /// Function called to handle http post method
   Future<HandlingServerLog> doHttpPost(
     String url,
     reqBody,
@@ -59,6 +62,7 @@ class NetworkService with ChangeNotifier {
     );
   }
 
+  /// Function called to handle http delete method
   Future<HandlingServerLog> doHttpDelete(url, reqBody) async {
     dynamic header;
     var requestBody = json.encode(reqBody);

@@ -2,21 +2,51 @@ import "package:flutter/material.dart";
 import 'package:tmdb_app/helpers/constant.dart';
 import 'package:tmdb_app/reusable_components/common_components/common_text.dart';
 
+/// A custom reusable button with outline border styling
 class CustomOutlinedButton extends StatelessWidget {
+  /// The text displayed inside button
   final String? labelText;
+
+  /// The button's text and icon color
   final Color? labelColor;
-  final Color? borderColor;
+
+  /// The button's text size default to 16px
   final double labelSize;
+
+  /// The button's background color default to white
   final Color? buttonColor;
+
+  /// The button's action when pressed
   final VoidCallback? onTap;
-  final double borderRadius;
+
+  /// The button's width default to taking the width of parent's widget width
   final double width;
+
+  /// The button's text padding vertically inside button default to 8px
   final double padding;
+
+  /// The button's status
   final bool active;
+
+  /// The text maxLines inside button default to 1 line
   final int maxLines;
+
+  /// The button's height
   final double height;
+
+  /// The button's label font weight
   final FontWeight labelWeight;
+
+  /// The button's label text overflow
   final TextOverflow textOverflow;
+
+  /// The button's border color
+  final Color? borderColor;
+
+  /// The button's border radius default to 8px
+  final double borderRadius;
+
+  /// The button's icon displayed beside text or only icon to be displayed
   final IconData? icon;
 
   const CustomOutlinedButton({

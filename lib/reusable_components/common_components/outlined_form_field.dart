@@ -1,18 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb_app/helpers/constant.dart';
 
+/// A custom reusable text field with outline border and transparent background styling
 class OutlinedFormField extends StatefulWidget {
+  /// The text input controller
   final TextEditingController inputController;
+
+  /// The text displayed inside text field as a hint
   final String? hintText;
+
+  /// What type of keyboard used to type the text field
   final TextInputType? inputType;
+
+  /// Whether the text is displayed or hidden
   final bool obscureText;
+
+  /// Icon displayed at the left side of the text
   final Icon? prefixIcon;
+
+  /// Icon displayed at the right side of the text
   final Widget? suffixIcon;
-  final BorderSide? borderSide;
+
+  /// Action when the keyboard is typing
   final Function(String)? onChange;
+
+  /// Whether the text field can be typed or not
   final bool? disabled;
+
+  /// The text size inside the text filed
   final double? fontSize;
+
+  /// The color of the text inside the text field
   final Color? labelColor;
+
+  /// The tex field color when the user is typing
   final Color? focussedColor;
 
   const OutlinedFormField({
@@ -20,7 +41,6 @@ class OutlinedFormField extends StatefulWidget {
     required this.inputController,
     this.obscureText = false,
     this.prefixIcon,
-    this.borderSide,
     this.onChange,
     this.hintText,
     this.inputType,
@@ -70,7 +90,8 @@ class _OutlinedFormFieldState extends State<OutlinedFormField> {
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: widget.disabled! ? Constant.colorGreyText : Constant.colorWhite,
+            color:
+                widget.disabled! ? Constant.colorGreyText : Constant.colorWhite,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(
