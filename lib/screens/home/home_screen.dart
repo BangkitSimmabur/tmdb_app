@@ -55,8 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
-
     progressStream.cancel();
 
     super.dispose();
@@ -127,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       popularMovies,
                       onAddFavorite: onAddFavoriteMovie,
                       onAddWatchList: onAddWatchList,
-                onSaveImage: onDownloadImage,
+                      onSaveImage: onDownloadImage,
                     ),
             ],
           ),
