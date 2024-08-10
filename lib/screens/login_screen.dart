@@ -8,6 +8,7 @@ import 'package:tmdb_app/reusable_components/common_components/button_full.dart'
 import 'package:tmdb_app/reusable_components/common_components/common_app_bar.dart';
 import 'package:tmdb_app/reusable_components/common_components/common_text.dart';
 import 'package:tmdb_app/reusable_components/common_components/outlined_form_field.dart';
+import 'package:tmdb_app/screens/home/home_screen.dart';
 import 'package:tmdb_app/services/auth_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -149,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
           context, "Failed to login, please try again");
     }
 
-    mounted ? PlatformHelper.backTransitionPage(context) : {};
+    mounted ? PlatformHelper.transitionToPage(context, HomeScreen(), newPage: true) : {};
 
     return;
   }
