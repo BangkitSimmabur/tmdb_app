@@ -10,15 +10,4 @@ class HandlingServerLog {
     this.message,
     this.success,
   );
-
-  HandlingServerLog.success(
-    this.success,
-    this.data,
-  );
-
-  HandlingServerLog.failed(
-    this.success,
-    this.status,
-    this.message,
-  );
 }
