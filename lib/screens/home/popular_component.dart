@@ -9,14 +9,14 @@ class HomePopularMovies extends StatelessWidget {
   final List<Movie> popularMovies;
   final Future<void> Function(int?) onAddWatchList;
   final Future<void> Function(int?) onAddFavorite;
-  final void Function()? onSaveImage;
+  final Future<void> Function(String) onSaveImage;
 
   const HomePopularMovies(
     this.popularMovies, {
     super.key,
     required this.onAddWatchList,
     required this.onAddFavorite,
-    this.onSaveImage,
+    required this.onSaveImage,
   });
 
   @override
@@ -78,7 +78,8 @@ class HomePopularMovies extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: CustomOutlinedButton(
                             icon: FontAwesomeIcons.download,
-                            onTap: onSaveImage,
+                            onTap: () => onSaveImage(
+                                "${Constant.imagePathOriginal}/${movie.posterPath}"),
                             buttonColor: Constant.colorBlackOpacity50,
                             borderColor: Constant.colorWhiteOpacity75,
                             labelColor: Constant.colorWhiteOpacity75,

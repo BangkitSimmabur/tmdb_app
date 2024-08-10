@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:fl_downloader/fl_downloader.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdb_app/helpers/constant.dart';
@@ -28,11 +30,36 @@ class _HomeScreenState extends State<HomeScreen> {
   bool popularLoading = true;
   List<Movie> nowPlayingMovies = [];
   List<Movie> popularMovies = [];
+  late StreamSubscription progressStream;
+  int progress = 0;
 
   @override
   void initState() {
-    Future.delayed(Duration.zero, initDataState);
     super.initState();
+    Future.delayed(Duration.zero, initDataState);
+
+    FlDownloader.initialize();
+    progressStream = FlDownloader.progressStream.listen(
+      (event) {
+        if (event.status == DownloadStatus.successful) {
+          PlatformHelper.showSuccessSnackbar(context, "Image downloaded");
+        } else if (event.status == DownloadStatus.running) {
+          PlatformHelper.showSuccessSnackbar(context, "Downloading image");
+        } else if (event.status == DownloadStatus.failed) {
+          PlatformHelper.showSuccessSnackbar(
+              context, "Failed to download image");
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+
+    progressStream.cancel();
+
+    super.dispose();
   }
 
   @override
@@ -78,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           nowPlayingMovies,
                           onAddFavorite: onAddFavoriteMovie,
                           onAddWatchList: onAddWatchList,
+                          onSaveImage: onDownloadImage,
                         ),
                 ),
               ),
@@ -99,6 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       popularMovies,
                       onAddFavorite: onAddFavoriteMovie,
                       onAddWatchList: onAddWatchList,
+                onSaveImage: onDownloadImage,
                     ),
             ],
           ),
@@ -212,5 +241,14 @@ class _HomeScreenState extends State<HomeScreen> {
       return false;
     }
     return true;
+  }
+
+  Future<void> onDownloadImage(String url) async {
+    var permission = await FlDownloader.requestPermission();
+
+    if (permission == StoragePermissionStatus.granted) {
+      var a = await FlDownloader.download(url);
+      print(a);
+    }
   }
 }
