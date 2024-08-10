@@ -18,8 +18,8 @@ class MovieService extends NetworkService {
   }
 
   Future<Movie?> getMovieDetail(int id) async {
-    HandlingServerLog serverLog =
-        await doHttpGet('/movie/$id?language=en-US&api_key=${Constant.tmdbApiKey}');
+    HandlingServerLog serverLog = await doHttpGet(
+        '/movie/$id?language=en-US&api_key=${Constant.tmdbApiKey}');
 
     if (serverLog.data != null) {
       Movie? movieDetail = Movie.fromJson(serverLog.data);
@@ -49,5 +49,33 @@ class MovieService extends NetworkService {
       return movies;
     }
     return null;
+  }
+
+  Future<HandlingServerLog> addToFavorites(int id, bool isAdd) async {
+    Map<String, dynamic> sessionReqBody = {
+      "media_type": "movie",
+      "media_id": id,
+      "favorite": isAdd,
+    };
+
+    HandlingServerLog serverLog = await doHttpPost(
+        '/account/${constantService.sessionID}/favorite?session_id=${constantService.sessionID}&api_key=${Constant.tmdbApiKey}',
+        sessionReqBody);
+
+    return serverLog;
+  }
+
+  Future<HandlingServerLog> onAddToWatchList(int id, bool isAdd) async {
+    Map<String, dynamic> sessionReqBody = {
+      "media_type": "movie",
+      "media_id": id,
+      "watchlist": isAdd,
+    };
+
+    HandlingServerLog serverLog = await doHttpPost(
+        '/account/${constantService.sessionID}/watchlist?session_id=${constantService.sessionID}&api_key=${Constant.tmdbApiKey}',
+        sessionReqBody);
+
+    return serverLog;
   }
 }

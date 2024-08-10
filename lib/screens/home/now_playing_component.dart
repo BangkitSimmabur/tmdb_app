@@ -7,17 +7,16 @@ import 'package:tmdb_app/reusable_components/common_components/outline_button.da
 import 'package:tmdb_app/reusable_components/movie_card.dart';
 
 class HomeNowPlayingMovies extends StatelessWidget {
-
   final List<Movie> nowPlayingMovies;
-  final void Function()? onAddWatchList;
-  final void Function()? onAddFavorite;
+  final Future<void> Function(int?) onAddWatchList;
+  final Future<void> Function(int?) onAddFavorite;
   final void Function()? onSaveImage;
 
   const HomeNowPlayingMovies(
     this.nowPlayingMovies, {
     super.key,
-    this.onAddWatchList,
-    this.onAddFavorite,
+    required this.onAddWatchList,
+    required this.onAddFavorite,
     this.onSaveImage,
   });
   @override
@@ -46,7 +45,7 @@ class HomeNowPlayingMovies extends StatelessWidget {
                     FontAwesomeIcons.solidHeart,
                     color: Constant.colorRed,
                   ),
-                  onPressed: onAddFavorite,
+                  onPressed: () => onAddFavorite(nowPlayingMovies[index].id),
                 ),
               ),
               Align(
@@ -58,7 +57,8 @@ class HomeNowPlayingMovies extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: CustomOutlinedButton(
                           icon: FontAwesomeIcons.plus,
-                          onTap: onAddWatchList,
+                          onTap: () =>
+                              onAddWatchList(nowPlayingMovies[index].id),
                           buttonColor: Constant.colorBlackOpacity75,
                           borderColor: Constant.colorWhiteOpacity75,
                           labelColor: Constant.colorWhiteOpacity75,

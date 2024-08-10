@@ -7,15 +7,15 @@ import 'package:tmdb_app/reusable_components/movie_card.dart';
 
 class HomePopularMovies extends StatelessWidget {
   final List<Movie> popularMovies;
-  final void Function()? onAddWatchList;
-  final void Function()? onAddFavorite;
+  final Future<void> Function(int?) onAddWatchList;
+  final Future<void> Function(int?) onAddFavorite;
   final void Function()? onSaveImage;
 
   const HomePopularMovies(
     this.popularMovies, {
     super.key,
-    this.onAddWatchList,
-    this.onAddFavorite,
+    required this.onAddWatchList,
+    required this.onAddFavorite,
     this.onSaveImage,
   });
 
@@ -54,7 +54,7 @@ class HomePopularMovies extends StatelessWidget {
                       FontAwesomeIcons.solidHeart,
                       color: Constant.colorRed,
                     ),
-                    onPressed: onAddFavorite,
+                    onPressed: () => onAddFavorite(movie.id),
                   ),
                 ),
                 Align(
@@ -66,7 +66,7 @@ class HomePopularMovies extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: CustomOutlinedButton(
                             icon: FontAwesomeIcons.plus,
-                            onTap: onAddFavorite,
+                            onTap: () => onAddWatchList(movie.id),
                             buttonColor: Constant.colorBlackOpacity75,
                             borderColor: Constant.colorWhiteOpacity75,
                             labelColor: Constant.colorWhiteOpacity75,

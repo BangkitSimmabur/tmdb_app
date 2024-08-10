@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdb_app/helpers/constant.dart';
 import 'package:tmdb_app/helpers/platform_helper.dart';
+import 'package:tmdb_app/helpers/server_helper.dart';
 import 'package:tmdb_app/models/movie.dart';
 import 'package:tmdb_app/reusable_components/common_components/common_app_bar.dart';
 import 'package:tmdb_app/reusable_components/common_components/common_spinner.dart';
@@ -73,7 +74,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 300,
                   child: nowPlayingLoading
                       ? const CommonSpinner()
-                      : HomeNowPlayingMovies(nowPlayingMovies),
+                      : HomeNowPlayingMovies(
+                          nowPlayingMovies,
+                          onAddFavorite: onAddFavoriteMovie,
+                          onAddWatchList: onAddWatchList,
+                        ),
                 ),
               ),
               const Padding(
@@ -90,7 +95,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               popularLoading
                   ? const CommonSpinner()
-                  : HomePopularMovies(popularMovies),
+                  : HomePopularMovies(
+                      popularMovies,
+                      onAddFavorite: onAddFavoriteMovie,
+                      onAddWatchList: onAddWatchList,
+                    ),
             ],
           ),
         ),
@@ -118,5 +127,90 @@ class _HomeScreenState extends State<HomeScreen> {
       return;
     }
     PlatformHelper.transitionToPage(context, const LoginScreen());
+  }
+
+  Future<void> onAddFavoriteMovie(int? id) async {
+    if (_checkLogin() == false) {
+      PlatformHelper.showErrorSnackbar(
+          context, "You need to login before adding to favorites");
+      return;
+    }
+    PlatformHelper.showLoadingAlert(context, 'Adding movie to favorites');
+
+    HandlingServerLog result = await _movieService.addToFavorites(id!, true);
+
+    mounted ? PlatformHelper.backTransitionPage(context) : {};
+
+    if (result.success == false) {
+      mounted
+          ? PlatformHelper.showErrorSnackbar(
+              context, "Failed to add movie to favorites")
+          : {};
+      return;
+    }
+
+    if (result.success == true && result.status == 12) {
+      mounted
+          ? PlatformHelper.showErrorSnackbar(
+              context, "Movie is already in your favorites")
+          : {};
+      return;
+    }
+
+    if (result.success == true && result.status == 1) {
+      mounted
+          ? PlatformHelper.showErrorSnackbar(
+              context, "Movie is added to favorites")
+          : {};
+      return;
+    }
+
+    return;
+  }
+
+  Future<void> onAddWatchList(int? id) async {
+    if (_checkLogin() == false) {
+      PlatformHelper.showErrorSnackbar(
+          context, "You need to login before adding to your watch list");
+      return;
+    }
+    PlatformHelper.showLoadingAlert(context, 'Adding movie to watch list');
+
+    HandlingServerLog result = await _movieService.onAddToWatchList(id!, true);
+
+    mounted ? PlatformHelper.backTransitionPage(context) : {};
+
+    if (result.success == false) {
+      mounted
+          ? PlatformHelper.showErrorSnackbar(
+              context, "Failed to add movie to your watch list")
+          : {};
+      return;
+    }
+
+    if (result.success == true && result.status == 12) {
+      mounted
+          ? PlatformHelper.showErrorSnackbar(
+              context, "Movie is already in your watch list")
+          : {};
+      return;
+    }
+
+    if (result.success == true && result.status == 1) {
+      mounted
+          ? PlatformHelper.showErrorSnackbar(
+              context, "Movie is added to your watch list")
+          : {};
+      return;
+    }
+
+    return;
+  }
+
+  bool _checkLogin() {
+    if (_constantService.userID == null || _constantService.sessionID == null) {
+      return false;
+    }
+    return true;
   }
 }
