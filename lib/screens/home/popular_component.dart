@@ -36,25 +36,35 @@ class HomePopularMovies extends StatelessWidget {
           ),
           child: SizedBox(
             height: MediaQuery.sizeOf(context).height * 2 / 3,
+            width:
+                MediaQuery.sizeOf(context).width - (Constant.paddingSM * 2),
             child: Stack(
               children: [
                 SizedBox(
                   height: MediaQuery.sizeOf(context).height * 2 / 3,
+                  width: MediaQuery.sizeOf(context).width -
+                      (Constant.paddingSM * 2),
                   child: MovieCard(
                     movie,
                   ),
                 ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    style: IconButton.styleFrom(
-                      backgroundColor: Constant.colorWhiteOpacity75,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: Constant.paddingSM,
+                    right: Constant.paddingSM,
+                  ),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      style: IconButton.styleFrom(
+                        backgroundColor: Constant.colorWhiteOpacity75,
+                      ),
+                      icon: const Icon(
+                        FontAwesomeIcons.solidHeart,
+                        color: Constant.colorRed,
+                      ),
+                      onPressed: () => onAddFavorite(movie.id),
                     ),
-                    icon: const Icon(
-                      FontAwesomeIcons.solidHeart,
-                      color: Constant.colorRed,
-                    ),
-                    onPressed: () => onAddFavorite(movie.id),
                   ),
                 ),
                 Align(

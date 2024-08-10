@@ -26,64 +26,75 @@ class HomeNowPlayingMovies extends StatelessWidget {
       itemBuilder: (context, index, pageViewIndex) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(Constant.borderRadiusSM),
-          child: Stack(
-            children: [
-              SizedBox(
-                height: 300,
-                width: 210,
-                child: MovieCard(
-                  nowPlayingMovies[index],
-                ),
-              ),
-              Align(
-                alignment: Alignment.topRight,
-                child: IconButton(
-                  style: IconButton.styleFrom(
-                    backgroundColor: Constant.colorWhiteOpacity75,
+          child: SizedBox(
+            height: 300,
+            width: 210,
+            child: Stack(
+              children: [
+                SizedBox(
+                  height: 300,
+                  width: 210,
+                  child: MovieCard(
+                    nowPlayingMovies[index],
                   ),
-                  icon: const Icon(
-                    FontAwesomeIcons.solidHeart,
-                    color: Constant.colorRed,
-                  ),
-                  onPressed: () => onAddFavorite(nowPlayingMovies[index].id),
                 ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CustomOutlinedButton(
-                          icon: FontAwesomeIcons.plus,
-                          onTap: () =>
-                              onAddWatchList(nowPlayingMovies[index].id),
-                          buttonColor: Constant.colorBlackOpacity75,
-                          borderColor: Constant.colorWhiteOpacity75,
-                          labelColor: Constant.colorWhiteOpacity75,
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: Constant.paddingSM,
+                      right: Constant.paddingSM,
+                    ),
+                    child: IconButton(
+                      style: IconButton.styleFrom(
+                        backgroundColor: Constant.colorWhiteOpacity75,
+                      ),
+                      icon: const Icon(
+                        FontAwesomeIcons.solidHeart,
+                        color: Constant.colorRed,
+                      ),
+                      onPressed: () =>
+                          onAddFavorite(nowPlayingMovies[index].id),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CustomOutlinedButton(
+                            icon: FontAwesomeIcons.plus,
+                            onTap: () =>
+                                onAddWatchList(nowPlayingMovies[index].id),
+                            buttonColor: Constant.colorBlackOpacity75,
+                            borderColor: Constant.colorWhiteOpacity75,
+                            labelColor: Constant.colorWhiteOpacity75,
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CustomOutlinedButton(
-                          icon: FontAwesomeIcons.download,
-                          onTap: () {
-                            onSaveImage(
-                                "${Constant.imagePathOriginal}/${nowPlayingMovies[index].posterPath!}");
-                          },
-                          buttonColor: Constant.colorBlackOpacity50,
-                          borderColor: Constant.colorWhiteOpacity75,
-                          labelColor: Constant.colorWhiteOpacity75,
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CustomOutlinedButton(
+                            icon: FontAwesomeIcons.download,
+                            onTap: () {
+                              onSaveImage(
+                                  "${Constant.imagePathOriginal}/${nowPlayingMovies[index].posterPath!}");
+                            },
+                            buttonColor: Constant.colorBlackOpacity50,
+                            borderColor: Constant.colorWhiteOpacity75,
+                            labelColor: Constant.colorWhiteOpacity75,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
