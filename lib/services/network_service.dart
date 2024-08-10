@@ -61,19 +61,9 @@ class NetworkService with ChangeNotifier {
     );
   }
 
-  Future<HandlingServerLog> doHttpPut(
-    String url,
-    reqBody,
-  ) async {
-    dynamic requestBody;
-    if (reqBody == null) {
-      requestBody = null;
-    }
-    if (reqBody != null) {
-      requestBody = json.encode(reqBody);
-    }
-
+  Future<HandlingServerLog> doHttpDelete(url, reqBody) async {
     dynamic header;
+    var requestBody = json.encode(reqBody);
 
     {
       header = {
@@ -82,33 +72,11 @@ class NetworkService with ChangeNotifier {
       };
     }
 
-    http.Response response = await http.put(
+    http.Response response = await http.delete(
       Uri.parse("${Constant.tmdbBaseUrl}$url"),
-      body: requestBody,
       headers: header,
+      body: requestBody,
     );
-
-    var resBody = json.decode(response.body);
-    return HandlingServerLog(
-      resBody['status_code'],
-      resBody,
-      resBody['status_message'],
-      resBody['success'],
-    );
-  }
-
-  Future<HandlingServerLog> doHttpDelete(url) async {
-    dynamic header;
-
-    {
-      header = {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      };
-    }
-
-    http.Response response = await http
-        .delete(Uri.parse("${Constant.tmdbBaseUrl}$url"), headers: header);
 
     var resBody = json.decode(response.body);
     return HandlingServerLog(
