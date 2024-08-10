@@ -52,7 +52,7 @@ class ProfileMovieComponent extends StatelessWidget {
                               color: Constant.colorBlackOpacity75,
                             ),
                             onPressed: () {
-                              onRemoveFromList!(movies[index].id);
+                              onRemoveFromList(movies[index].id);
                             },
                           ),
                         ),
