@@ -24,10 +24,21 @@ class MovieCard extends StatelessWidget {
           );
         },
         child: Container(
-          color: Constant.colorLightGrey,
           child: Image.network(
             "${Constant.imagePath500}/${movie.posterPath!}",
             fit: BoxFit.cover,
+            loadingBuilder: (BuildContext context, Widget child,
+                ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                      loadingProgress.expectedTotalBytes!
+                      : null,
+                ),
+              );
+            },
           ),
         ),
       ),
