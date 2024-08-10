@@ -79,9 +79,6 @@ class MyAppState extends State<MyApp> {
       '/': (dynamic data) => MaterialPageRoute(
             builder: (context) => const HomeScreen(),
           ),
-      '/home': (dynamic data) => MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
-          ),
     };
   }
 }
