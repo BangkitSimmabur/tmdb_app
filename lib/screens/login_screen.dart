@@ -145,10 +145,14 @@ class _LoginScreenState extends State<LoginScreen> {
     /// If failed logging in show error message
     if (result.success == false && mounted) {
       PlatformHelper.showErrorSnackbar(
-          context, "Failed to login, please try again");
+          context, result.message ?? "Failed to login, please try again");
+      return;
     }
 
-    mounted ? PlatformHelper.transitionToPage(context, HomeScreen(), newPage: true) : {};
+    mounted
+        ? PlatformHelper.transitionToPage(context, const HomeScreen(),
+            newPage: true)
+        : {};
 
     return;
   }

@@ -22,7 +22,8 @@ class AuthService extends NetworkService {
     );
 
     // stop the login process if fail to authenticate user
-    if (!loginLog.success!) {
+    if (loginLog.success == false) {
+      print("false here");
       return loginLog;
     }
 
@@ -31,7 +32,8 @@ class AuthService extends NetworkService {
     );
 
     // stop the login process if fail to create session for authenticated user
-    if (!sessionLog.success!) {
+    if (sessionLog.success  == false) {
+      print("false here2");
       return sessionLog;
     }
 
