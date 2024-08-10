@@ -12,7 +12,7 @@ import 'package:tmdb_app/reusable_components/common_components/common_text.dart'
 import 'package:tmdb_app/screens/home/now_playing_component.dart';
 import 'package:tmdb_app/screens/home/popular_component.dart';
 import 'package:tmdb_app/screens/login_screen.dart';
-import 'package:tmdb_app/screens/profile_screen.dart';
+import 'package:tmdb_app/screens/profile/profile_screen.dart';
 import 'package:tmdb_app/services/constant_service.dart';
 import 'package:tmdb_app/services/movie_service.dart';
 
