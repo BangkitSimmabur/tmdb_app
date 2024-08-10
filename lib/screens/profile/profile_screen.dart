@@ -123,7 +123,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               labelWeight: FontWeight.w600,
               buttonColor: Constant.colorWhite,
               borderRadius: 4,
-              onClick: () {},
+              onClick: logOut,
               btnBorderSide:
                   const BorderSide(width: 4, color: Constant.colorWhite),
             ),
@@ -258,5 +258,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
 
     return;
+  }
+
+  Future<void> logOut() async{
+    await _authService.removeSession();
+
+    mounted ? PlatformHelper.backTransitionPage(context) : {};
+
   }
 }

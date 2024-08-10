@@ -11,7 +11,6 @@ import 'package:tmdb_app/services/constant_service.dart';
 import 'package:tmdb_app/services/movie_service.dart';
 import 'package:tmdb_app/services/navigation_service.dart';
 import 'package:tmdb_app/services/network_service.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 void main() {
   setupLocator();
@@ -67,19 +66,13 @@ class MyAppState extends State<MyApp> {
           create: (_) => AuthService(_constantService),
         ),
       ],
-      child: RefreshConfiguration(
-        headerBuilder: () => const MaterialClassicHeader(),
-        footerBuilder: () => const ClassicFooter(
-          loadStyle: LoadStyle.ShowAlways,
+      child: MaterialApp(
+        title: 'TMDB APP',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
         ),
-        child: MaterialApp(
-          title: 'TMDB APP',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: const HomeScreen(),
-        ),
+        home: const HomeScreen(),
       ),
     );
   }
