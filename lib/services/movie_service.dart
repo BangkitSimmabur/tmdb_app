@@ -1,10 +1,11 @@
 import 'package:tmdb_app/helpers/constant.dart';
+import 'package:tmdb_app/helpers/secure_storage_helper.dart';
 import 'package:tmdb_app/helpers/server_helper.dart';
 import 'package:tmdb_app/models/movie.dart';
 import 'package:tmdb_app/services/network_service.dart';
 
 class MovieService extends NetworkService {
-  MovieService(super.constantService);
+  MovieService();
 
   Future<List<Movie>?> getNowPlaying() async {
     HandlingServerLog serverLog = await doHttpGet(
@@ -58,8 +59,11 @@ class MovieService extends NetworkService {
       "favorite": isAdd,
     };
 
+    var sessionID = await SecureStorageHelper.getSession();
+    var userID = await SecureStorageHelper.getUserID();
+
     HandlingServerLog serverLog = await doHttpPost(
-        '/account/${constantService.sessionID}/favorite?session_id=${constantService.sessionID}&api_key=${Constant.tmdbApiKey}',
+        '/account/$userID/favorite?session_id=$sessionID&api_key=${Constant.tmdbApiKey}',
         sessionReqBody);
 
     return serverLog;
@@ -72,23 +76,29 @@ class MovieService extends NetworkService {
       "watchlist": isAdd,
     };
 
+    var sessionID = await SecureStorageHelper.getSession();
+    var userID = await SecureStorageHelper.getUserID();
     HandlingServerLog serverLog = await doHttpPost(
-        '/account/${constantService.sessionID}/watchlist?session_id=${constantService.sessionID}&api_key=${Constant.tmdbApiKey}',
+        '/account/$userID/watchlist?session_id=$sessionID&api_key=${Constant.tmdbApiKey}',
         sessionReqBody);
 
     return serverLog;
   }
 
   Future<HandlingServerLog> getFavoriteMovies(int page) async {
+    var sessionID = await SecureStorageHelper.getSession();
+    var userID = await SecureStorageHelper.getUserID();
     HandlingServerLog serverLog = await doHttpGet(
-        '/account/${constantService.userID}/favorite/movies?language=en-US&page=$page&session_id=${constantService.sessionID}&sort_by=created_at.asc&api_key=${Constant.tmdbApiKey}');
+        '/account/$userID/favorite/movies?language=en-US&page=$page&session_id=$sessionID&sort_by=created_at.asc&api_key=${Constant.tmdbApiKey}');
 
     return serverLog;
   }
 
   Future<HandlingServerLog> getWatchList(int page) async {
+    var sessionID = await SecureStorageHelper.getSession();
+    var userID = await SecureStorageHelper.getUserID();
     HandlingServerLog serverLog = await doHttpGet(
-        '/account/${constantService.userID}/watchlist/movies?language=en-US&page=$page&session_id=${constantService.sessionID}&sort_by=created_at.asc&api_key=${Constant.tmdbApiKey}');
+        '/account/$userID/watchlist/movies?language=en-US&page=$page&session_id=$sessionID&sort_by=created_at.asc&api_key=${Constant.tmdbApiKey}');
 
     return serverLog;
   }

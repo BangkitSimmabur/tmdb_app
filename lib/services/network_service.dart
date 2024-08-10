@@ -3,11 +3,9 @@ import 'package:http/http.dart' as http;
 import 'package:tmdb_app/helpers/constant.dart';
 import 'package:tmdb_app/helpers/server_helper.dart';
 import 'dart:convert';
-import 'package:tmdb_app/services/constant_service.dart';
 
 class NetworkService with ChangeNotifier {
-  ConstantService constantService;
-  NetworkService(this.constantService);
+  NetworkService();
 
   Future<HandlingServerLog> doHttpGet(url) async {
     dynamic header;

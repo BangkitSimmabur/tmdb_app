@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdb_app/helpers/constant.dart';
 import 'package:tmdb_app/helpers/platform_helper.dart';
+import 'package:tmdb_app/helpers/secure_storage_helper.dart';
 import 'package:tmdb_app/helpers/server_helper.dart';
 import 'package:tmdb_app/models/movie.dart';
 import 'package:tmdb_app/reusable_components/common_components/common_app_bar.dart';
@@ -13,7 +14,6 @@ import 'package:tmdb_app/screens/home/now_playing_component.dart';
 import 'package:tmdb_app/screens/home/popular_component.dart';
 import 'package:tmdb_app/screens/login_screen.dart';
 import 'package:tmdb_app/screens/profile/profile_screen.dart';
-import 'package:tmdb_app/services/constant_service.dart';
 import 'package:tmdb_app/services/movie_service.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,7 +25,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late MovieService _movieService;
-  late ConstantService _constantService;
   bool nowPlayingLoading = true;
   bool popularLoading = true;
   List<Movie> nowPlayingMovies = [];
@@ -63,7 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     _movieService = Provider.of<MovieService>(context);
-    _constantService = Provider.of<ConstantService>(context);
     return Scaffold(
       appBar: CommonAppBar(
         "Home",
@@ -148,21 +146,29 @@ class _HomeScreenState extends State<HomeScreen> {
     return;
   }
 
-  void _onNavigateToProfile() {
-    if (_constantService.sessionID != null && _constantService.userID != null) {
-      PlatformHelper.transitionToPage(context, const ProfileScreen());
+  void _onNavigateToProfile() async {
+    if (await _checkLogin()) {
+      mounted
+          ? PlatformHelper.transitionToPage(context, const ProfileScreen())
+          : {};
       return;
     }
-    PlatformHelper.transitionToPage(context, const LoginScreen());
+    mounted
+        ? PlatformHelper.transitionToPage(context, const LoginScreen())
+        : {};
   }
 
   Future<void> onAddFavoriteMovie(int? id) async {
-    if (_checkLogin() == false) {
-      PlatformHelper.showErrorSnackbar(
-          context, "You need to login before adding to favorites");
+    if (await _checkLogin() == false) {
+      mounted
+          ? PlatformHelper.showErrorSnackbar(
+              context, "You need to login before adding to favorites")
+          : {};
       return;
     }
-    PlatformHelper.showLoadingAlert(context, 'Adding movie to favorites');
+    mounted
+        ? PlatformHelper.showLoadingAlert(context, 'Adding movie to favorites')
+        : {};
 
     HandlingServerLog result = await _movieService.addToFavorites(id!, true);
 
@@ -196,12 +202,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> onAddWatchList(int? id) async {
-    if (_checkLogin() == false) {
-      PlatformHelper.showErrorSnackbar(
-          context, "You need to login before adding to your watch list");
+    if (await _checkLogin() == false) {
+      mounted
+          ? PlatformHelper.showErrorSnackbar(
+              context, "You need to login before adding to your watch list")
+          : {};
       return;
     }
-    PlatformHelper.showLoadingAlert(context, 'Adding movie to watch list');
+    mounted
+        ? PlatformHelper.showLoadingAlert(context, 'Adding movie to watch list')
+        : {};
 
     HandlingServerLog result = await _movieService.onAddToWatchList(id!, true);
 
@@ -234,8 +244,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return;
   }
 
-  bool _checkLogin() {
-    if (_constantService.userID == null || _constantService.sessionID == null) {
+  Future<bool> _checkLogin() async {
+    var sessionID = await SecureStorageHelper.getSession();
+    var userID = await SecureStorageHelper.getUserID();
+
+    if (userID == null || sessionID == null) {
       return false;
     }
     return true;
@@ -245,8 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var permission = await FlDownloader.requestPermission();
 
     if (permission == StoragePermissionStatus.granted) {
-      var a = await FlDownloader.download(url);
-      print(a);
+      await FlDownloader.download(url);
     }
   }
 }

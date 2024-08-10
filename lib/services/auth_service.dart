@@ -4,7 +4,7 @@ import 'package:tmdb_app/helpers/server_helper.dart';
 import 'package:tmdb_app/services/network_service.dart';
 
 class AuthService extends NetworkService {
-  AuthService(super.constantService);
+  AuthService();
 
   Future<HandlingServerLog> login(String userName, String password) async {
     HandlingServerLog tokenLog = await getRequestToken();
@@ -36,7 +36,6 @@ class AuthService extends NetworkService {
     );
 
     if (userLog.data["id"] != null) {
-      constantService.userID = userLog.data["id"];
       SecureStorageHelper.writeSecureStorage(
         "userID",
         userLog.data["id"].toString(),
@@ -81,7 +80,6 @@ class AuthService extends NetworkService {
         sessionReqBody);
 
     if (serverLog.success == true) {
-      constantService.sessionID = serverLog.data["session_id"];
       SecureStorageHelper.writeSecureStorage(
         "sessionID",
         serverLog.data["session_id"],
