@@ -31,8 +31,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   List<Movie> watchListMovies = [];
   int favoritePage = 1;
   int watchListPage = 1;
-  int? favoriteMaxPage;
-  int? watchListMaxPage;
+  bool canFetchFavorite = true;
+  bool canFetchWatchlist = true;
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     watchListScrollController.addListener(() {
       if (watchListScrollController.position.maxScrollExtent ==
           watchListScrollController.offset) {
-        fetchFavoriteMovie();
+        fetchWatchList();
       }
     });
   }
@@ -64,7 +64,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _movieService = Provider.of<MovieService>(context);
     _constantService = Provider.of<ConstantService>(context);
     _authService = Provider.of<AuthService>(context);
-    print(_constantService.sessionID);
 
     return Scaffold(
       backgroundColor: Constant.colorBlack,
@@ -143,7 +142,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> fetchFavoriteMovie() async {
-    if (favoriteMaxPage == favoritePage) {
+    if (!canFetchFavorite) {
       return;
     }
 
@@ -158,11 +157,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       var movies = moviesFromJson(serverLog.data['results']);
       setState(() {
         favoriteMovies = [...favoriteMovies, ...movies ?? []];
-        favoriteMaxPage = serverLog.data["total_pages"];
+        favoritePage = favoritePage + 1;
       });
-      if (favoritePage < favoriteMaxPage!) {
+
+      if (favoritePage > serverLog.data["total_pages"]!) {
         setState(() {
-          favoritePage = favoritePage++;
+          canFetchFavorite = false;
         });
       }
     }
@@ -174,7 +174,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> fetchWatchList() async {
-    if (watchListMaxPage == watchListPage) {
+    if (!canFetchWatchlist) {
       return;
     }
 
@@ -189,11 +189,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       var movies = moviesFromJson(serverLog.data['results']);
       setState(() {
         watchListMovies = [...watchListMovies, ...movies ?? []];
-        watchListMaxPage = serverLog.data["total_pages"];
+        watchListPage = watchListPage + 1;
       });
-      if (watchListPage < watchListMaxPage!) {
+      if (watchListPage > serverLog.data["total_pages"]) {
         setState(() {
-          watchListPage = watchListPage++;
+          canFetchWatchlist = false;
         });
       }
     }
@@ -214,15 +214,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (result.success == false) {
       mounted
           ? PlatformHelper.showErrorSnackbar(
-          context, "Failed to remove movie from favorites")
+              context, "Failed to remove movie from favorites")
           : {};
       return;
     }
 
-    if (result.success == true ) {
+    if (result.success == true) {
       mounted
           ? PlatformHelper.showSuccessSnackbar(
-          context, "Movie removed from favorites")
+              context, "Movie removed from favorites")
           : {};
       setState(() {
         favoriteMovies.removeWhere((e) => e.id == id);
@@ -243,16 +243,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (result.success == false) {
       mounted
           ? PlatformHelper.showErrorSnackbar(
-          context, "Failed to remove movie from your watch list")
+              context, "Failed to remove movie from your watch list")
           : {};
       return;
     }
 
-
-    if (result.success == true ) {
+    if (result.success == true) {
       mounted
           ? PlatformHelper.showSuccessSnackbar(
-          context, "Movie removed from your watch list")
+              context, "Movie removed from your watch list")
           : {};
 
       setState(() {
